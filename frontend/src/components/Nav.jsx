@@ -1,12 +1,14 @@
 import React from 'react';
-import { BookOpen, User, CheckCircle, Cloud, Layout,Pizza } from 'lucide-react';
+import { BookOpen, User, CheckCircle, Cloud, Layout,Pizza, Binoculars } from 'lucide-react';
+
 
 const Nav = () => {
   return (
     <nav className="flex bg-black justify-between items-center px-6 py-4 ">
       {/* Logo */}
-      <div className="font-bold text-white text-xl">
-        GoGuid
+      <div className="font-bold flex gap-3 justify-center items-center text-white text-xl">
+        <Binoculars size="24" />
+        GoGuide
       </div>
      
 
@@ -26,8 +28,6 @@ const Nav = () => {
     </nav>
   );
 };
-
-// NavItem component for individual navigation buttons
 
 
 // ChevronDown component

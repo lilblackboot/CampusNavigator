@@ -2,7 +2,7 @@ import React from 'react'
 import ChatBot from './ChatBot'
 function FindMyTeacher() {
   return (
-    <div>
+    <div className='py-10'>
       <ChatBot/>
     </div>
   )

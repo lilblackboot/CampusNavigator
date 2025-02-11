@@ -82,15 +82,8 @@ const ChatBot = () => {
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto h-[600px] flex flex-col bg-gradient-to-b from-white to-gray-50">
-      <CardHeader className="border-b bg-white/80 backdrop-blur-sm">
-        <CardTitle className="flex items-center gap-2">
-          <Bot className="w-6 h-6 text-blue-500" />
-          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Timetable Assistant
-          </span>
-        </CardTitle>
-      </CardHeader>
+    <Card className="w-full max-w-2xl mx-auto h-[600px]  flex flex-col bg-gradient-to-b from-white to-gray-50">
+      
       
       <CardContent className="flex-1 flex flex-col p-4">
         <div 

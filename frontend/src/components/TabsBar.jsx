@@ -29,13 +29,13 @@ const tabContent = {
 }
 
   return (
-    <div className='bg-black'>
+    <div className='bg-black min-h-screen'>
         <div className='bg-black flex justify-center text-white'>
             {tabs.map((tab)=>(
                 <button key={tab.id} onClick={()=> setActiveTab(tab.id)} className={`px-4 rounded-t-lg py-2 font-semibold ${activeTab === tab.id ? 'bg-white text-black': ""}`}>{tab.label}</button>
             ))}
         </div>
-        <div className='bg-white mx-4 min-h-screen rounded-lg'>
+        <div className='bg-white mx-4 min-h-screen  rounded-lg'>
             {tabContent[activeTab]}
         </div>
     </div>

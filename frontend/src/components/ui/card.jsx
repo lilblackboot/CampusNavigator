@@ -4,11 +4,10 @@ const Card = React.forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
     className={`
-      rounded-lg border bg-card text-card-foreground
-      shadow-sm transition-all duration-300
-      hover:shadow-lg hover:scale-[1.02]
-      dark:bg-gray-800 dark:border-gray-700
-      bg-white backdrop-blur-sm
+      rounded-lg   text-card-foreground
+       transition-all duration-300
+      dark:bg-gray-800 
+     backdrop-blur-sm
       animate-fadeIn
       ${className}`}
     {...props}
@@ -21,7 +20,6 @@ const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
     ref={ref}
     className={`
       flex flex-col space-y-1.5 p-6
-      border-b border-gray-100 dark:border-gray-700
       animate-slideDown
       ${className}`}
     {...props}

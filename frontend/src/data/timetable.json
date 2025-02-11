@@ -1,0 +1,194 @@
+[
+    {
+        "Day":null,
+        "Time":"9.45-10.45",
+        "Subject":"ES",
+        "Faculty":"Sanket gandhi",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"Monday",
+        "Time":"10.45-11.45",
+        "Subject":"ML",
+        "Faculty":"Vinod Patidar",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"Monday",
+        "Time":"2.45-3.45",
+        "Subject":"QR",
+        "Faculty":"Riddhi limbachiya",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"Monday",
+        "Time":"3.45-4.45",
+        "Subject":"CD",
+        "Faculty":"Ayushi Desai",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"Tuesday",
+        "Time":"9.45-11.45",
+        "Subject":"MSWD",
+        "Faculty":"Neetesh parashar",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"Tuesday",
+        "Time":"12.45-1.35",
+        "Subject":"MAD",
+        "Faculty":"Soumen Mukherjii",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"Tuesday",
+        "Time":"1.35-2.25",
+        "Subject":"QR",
+        "Faculty":"Riddhi limbachiya",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"Tuesday",
+        "Time":"2.45-4.45",
+        "Subject":"CD",
+        "Faculty":"Ayushi Desai",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"wedneday",
+        "Time":"9.45 -10.45",
+        "Subject":"QR",
+        "Faculty":"Riddhi limbachiya",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"wedneday",
+        "Time":"10.45-11.45",
+        "Subject":"MSWD",
+        "Faculty":"Neetesh parashar",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"wedneday",
+        "Time":"12.45-2.25",
+        "Subject":"ML",
+        "Faculty":"Vinod Patidar and Keya S Patel",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"wedneday",
+        "Time":"2.45-4.45",
+        "Subject":"MAD",
+        "Faculty":"Soumen Mukherjii",
+        "Room_No":202.0,
+        "Division":"6A2"
+    },
+    {
+        "Day":"Monday",
+        "Time":"9.45-11.45",
+        "Subject":"CD",
+        "Faculty":"Bhumi Shah and Arpita Meet Vaidya",
+        "Room_No":205.0,
+        "Division":"6A3"
+    },
+    {
+        "Day":"Monday",
+        "Time":"12.45-1.35",
+        "Subject":"QR",
+        "Faculty":"Riddhi limbachiya",
+        "Room_No":205.0,
+        "Division":"6A3"
+    },
+    {
+        "Day":"Monday",
+        "Time":"1.35-2.25",
+        "Subject":"ML",
+        "Faculty":"Gaurav Kumar Ameta",
+        "Room_No":205.0,
+        "Division":"6A3"
+    },
+    {
+        "Day":"Thursday",
+        "Time":"9.45-11.45",
+        "Subject":"ML",
+        "Faculty":"Gaurav Kumar Ameta and Sweety patel",
+        "Room_No":205.0,
+        "Division":"6A3"
+    },
+    {
+        "Day":"Thursday",
+        "Time":"12.45-1.35",
+        "Subject":"MAD",
+        "Faculty":"Soumen Mukherjii",
+        "Room_No":205.0,
+        "Division":"6A3"
+    },
+    {
+        "Day":"Thursday",
+        "Time":"1.35-2.25",
+        "Subject":"MSWD",
+        "Faculty":"Bisal Kumar Show",
+        "Room_No":205.0,
+        "Division":"6A3"
+    },
+    {
+        "Day":"Thursday",
+        "Time":"2.45-3.45",
+        "Subject":"QR",
+        "Faculty":"Riddhi limbachiya",
+        "Room_No":205.0,
+        "Division":"6A3"
+    },
+    {
+        "Day":"Thursday",
+        "Time":"3.45-4.45",
+        "Subject":"ES",
+        "Faculty":"Irfatnaz Shaikh",
+        "Room_No":205.0,
+        "Division":"6A3"
+    },
+    {
+        "Day":"Friday",
+        "Time":"9.45-10.45",
+        "Subject":"QR",
+        "Faculty":"Riddhi limbachiya",
+        "Room_No":205.0,
+        "Division":"6A3"
+    },
+    {
+        "Day":"Friday",
+        "Time":"10.45-11.45",
+        "Subject":"CD",
+        "Faculty":"Bhumi Shah ",
+        "Room_No":205.0,
+        "Division":"6A3"
+    },
+    {
+        "Day":"Friday",
+        "Time":"12.45-2.25",
+        "Subject":"MAD",
+        "Faculty":"Soumen Mukherjii",
+        "Room_No":205.0,
+        "Division":"6A3"
+    },
+    {
+        "Day":"Friday",
+        "Time":"2.45-4.45",
+        "Subject":"MSWD",
+        "Faculty":"Bisal Kumar Show",
+        "Room_No":205.0,
+        "Division":"6A3"
+    }
+]

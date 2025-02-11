@@ -6,8 +6,8 @@ const Nav = () => {
   return (
     <nav className="flex bg-black justify-between items-center px-6 py-4 ">
       {/* Logo */}
-      <div className="font-bold flex gap-3 justify-center items-center text-white text-xl">
-        <Binoculars size="24" />
+      <div className="font-bold flex gap-3 justify-center items-center text-white text-3xl">
+        <Binoculars size="30" />
         GoGuide
       </div>
      

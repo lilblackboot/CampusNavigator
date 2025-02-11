@@ -35,7 +35,7 @@ const tabContent = {
                 <button key={tab.id} onClick={()=> setActiveTab(tab.id)} className={`px-4 rounded-t-lg py-2 font-semibold ${activeTab === tab.id ? 'bg-white text-black': ""}`}>{tab.label}</button>
             ))}
         </div>
-        <div className='bg-white mx-4 min-h-screen  rounded-lg'>
+        <div className='bg-white mx-4   rounded-lg'>
             {tabContent[activeTab]}
         </div>
     </div>

@@ -61,7 +61,7 @@ Make sure you have **Node.js** and **npm** installed (because magic needs a foun
 
 ---
 ## 📝 TODO (a.k.a. Stuff We Still Need to Do) 
-- [ x ] 🔐 Improve authentication & authorization (no hackers allowed!)
+- [x] 🔐 Improve authentication & authorization (no hackers allowed!)
 - [ ] 🧹 Need to clean up directory structure
 - [ ] 🤖 Implement chatbot using Gemini API for better navigation
 - [ ] 🎨 Develop a sleek UI for attendance tracking

@@ -1,51 +1,80 @@
-# 🤖 Academic Chatbot - Find Your Professor Easily!
+# 🎓 Campus Navigator 🚀
 
-## 📌 Overview
+Welcome to **Campus Navigator**, your ultimate college companion! Designed primarily for freshers (but useful for everyone), this smart assistant helps you:
 
-This chatbot helps students find their professors based on an academic schedule 📚. It allows users to search for professors using **partial names**, **time-based queries**, and **classroom schedules** while ensuring ease of use and privacy. The chatbot is powered by the **Gemini API** and uses **JSON data** for academic schedules.
+✅ Find where a professor is teaching 👨‍🏫📍  
+✅ Locate classrooms & assignment submission points 📚📩  
+✅ Track campus events 🎉📅  
+✅ Discover the best food spots on campus 🍕🍔  
+✅ Manage attendance & see if you can take a leave 📝❌  
 
-## 📜 JSON Data Schema
-
-The chatbot fetches data from a JSON file (`schedule.json`). The schema is structured as follows:
-
-```json
-{
-  "professors": [
-    {
-      "name": "<Professor Name>",
-      "subjects": [
-        {
-          "name": "<Subject Name>",
-          "schedule": [
-            { "day": "<Day>", "time": "<Time>", "room": "<Room Number>" }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
-
-### 🔹 Schema Details
-
-- **`professors`**: A list containing professor details.
-  - **`name`**: Full name of the professor.
-  - **`subjects`**: A list of subjects the professor teaches.
-    - **`name`**: Name of the subject.
-    - **`schedule`**: A list of class schedules.
-      - **`day`**: The day of the week when the class takes place.
-      - **`time`**: The time slot for the class.
-      - **`room`**: The classroom where the class is held.
-
-## 📜 License
-
-This project is **MIT licensed**.
-
-## 💡 Future Enhancements
-
-- ✅ **Web-based UI** 🌐
+Because let’s be honest—college is hard enough without having to wander around like a lost puppy! 🐶
 
 ---
+## 🛠️ Tech Stack
+- **Frontend:** React, Axios ⚛️
+- **Backend:** Node.js, Express.js 🛠️
+- **Database:** MongoDB Atlas 🗄️
+- **Authentication & Security:** Bcrypt.js, Dotenv, Nodemailer 🔒
 
-🚀 Happy Coding! 🎓
+---
+## 🚀 Installation
+
+### Prerequisites
+Make sure you have **Node.js** and **npm** installed (because magic needs a foundation 🏗️).
+
+### Backend Setup
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repo/campus-navigator.git
+   cd campus-navigator
+   ```
+2. Install dependencies:
+   ```sh
+   npm install express mongoose cors bcryptjs nodemailer dotenv axios
+   ```
+3. Create a `.env` file and add the required secrets (shhh 🤫):
+   ```sh
+   MONGO_URI=your_mongodb_uri
+   JWT_SECRET=your_secret_key
+   EMAIL_USER=your_email
+   EMAIL_PASS=your_email_password
+   ```
+4. Start the backend server:
+   ```sh
+   node server.js
+   ```
+
+### Frontend Setup
+1. Navigate to the frontend directory:
+   ```sh
+   cd client
+   ```
+2. Install frontend dependencies:
+   ```sh
+   npm install react react-dom axios
+   ```
+3. Start the React development server:
+   ```sh
+   npm start
+   ```
+
+---
+## 📝 TODO (a.k.a. Stuff We Still Need to Do) 
+- [ x ] 🔐 Improve authentication & authorization (no hackers allowed!)
+- [ ] 🧹 Need to clean up directory structure
+- [ ] 🤖 Implement chatbot using Gemini API for better navigation
+- [ ] 🎨 Develop a sleek UI for attendance tracking
+- [ ] ⚡ Optimize database queries for faster performance (no more lag!)
+- [ ] 🔔 Add push notifications for important campus updates
+- [ ] 🍽️ Expand food recommendations with user reviews (because food is life!)
+- [ ] 🧹 **Cleanup:** Merge frontend and backend `node_modules` into a single root `node_modules` directory. (Assigned to [@lilblackboot](https://github.com/lilblackboot) 🛠️)
+
+---
+## 🙌 Contributing
+Contributions are **super welcome**! Open a pull request or report an issue, and let’s make college life a breeze. 🌬️🎓
+
+---
+## 📜 License
+This project is licensed under the MIT License. That means you’re free to use, modify, and share—just don’t forget to give us a shout-out! 📢😄
 

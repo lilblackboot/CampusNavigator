@@ -83,7 +83,7 @@
         "Day":"wedneday",
         "Time":"12.45-2.25",
         "Subject":"ML",
-        "Faculty":"Vinod Patidar and Keya S Patel",
+        "Faculty":["Vinod Patidar"," Keya S Patel"],
         "Room_No":202.0,
         "Division":"6A2"
     },
@@ -99,7 +99,7 @@
         "Day":"Monday",
         "Time":"9.45-11.45",
         "Subject":"CD",
-        "Faculty":"Bhumi Shah and Arpita Meet Vaidya",
+        "Faculty":["Bhumi Shah "," Arpita Meet Vaidya"],
         "Room_No":205.0,
         "Division":"6A3"
     },
@@ -123,7 +123,7 @@
         "Day":"Thursday",
         "Time":"9.45-11.45",
         "Subject":"ML",
-        "Faculty":"Gaurav Kumar Ameta and Sweety patel",
+        "Faculty":["Gaurav Kumar Ameta "," Sweety patel"],
         "Room_No":205.0,
         "Division":"6A3"
     },
@@ -190,5 +190,766 @@
         "Faculty":"Bisal Kumar Show",
         "Room_No":205.0,
         "Division":"6A3"
+    },
+
+
+    {
+        "Day": "Monday",
+        "Time": "9.45-10.45",
+        "Subject": "LIBRARY",
+        "Faculty": null,
+        "Email": null,
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Tuesday",
+        "Time": "9.45-10.45",
+        "Subject": "IMP",
+        "Faculty": "Sandip Suresh Hire",
+        "Email": "sandip.datascientist@gmail.com",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Wednesday",
+        "Time": "9.45-10.45",
+        "Subject": "ES",
+        "Faculty": "Fedrick Mecwan",
+        "Email": "fedrick.mecwan20035@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Wednesday",
+        "Time": "10.45-11.45",
+        "Subject": "QR",
+        "Faculty": "Rahul Prajapati",
+        "Email": "RAHULKUMAR.PRAJAPATI37280@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Wednesday",
+        "Time": "12.45-1.35",
+        "Subject": "ML",
+        "Faculty": "Gaurav Kumar Ameta",
+        "Email": "gaurav.ameta24442@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Wednesday",
+        "Time": "1.35-2.25",
+        "Subject": "MSWD",
+        "Faculty": "Maksud Vhora",
+        "Email": "maksud.vahora72@gmail.com",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Wednesday",
+        "Time": "2.45-3.45",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Email": "akashugale8554@gmail.com",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Thursday",
+        "Time": "9.45-10.45",
+        "Subject": "MSWD",
+        "Faculty": "Maksud Vhora",
+        "Email": "maksud.vahora72@gmail.com",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Thursday",
+        "Time": "10.45-11.45",
+        "Subject": "QR",
+        "Faculty": "Rahul Prajapati",
+        "Email": "RAHULKUMAR.PRAJAPATI37280@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Thursday",
+        "Time": "12.45-1.35",
+        "Subject": "CD",
+        "Faculty": "Bhumi Shah",
+        "Email": "bhumi.shah19174@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Thursday",
+        "Time": "1.35-2.25",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Email": "akashugale8554@gmail.com",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Thursday",
+        "Time": "2.45-3.45",
+        "Subject": "ML",
+        "Faculty": ["Gaurav Kumar Ameta" ," Vinod Patidar"],
+        "Email": "gaurav.ameta24442@paruluniversity.ac.in, Vinod.patidar28579@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Friday",
+        "Time": "9.45-10.45",
+        "Subject": "MSWD",
+        "Faculty": "Maksud Vhora",
+        "Email": "maksud.vahora72@gmail.com",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Friday",
+        "Time": "12.45-1.35",
+        "Subject": "ML",
+        "Faculty": "Gaurav Kumar Ameta",
+        "Email": "gaurav.ameta24442@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Friday",
+        "Time": "1.35-2.25",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Email": "akashugale8554@gmail.com",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Friday",
+        "Time": "2.45-3.45",
+        "Subject": "CD",
+        "Faculty": "Bhumi Shah",
+        "Email": "bhumi.shah19174@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Friday",
+        "Time": "3.45-4.45",
+        "Subject": "ML",
+        "Faculty": "Gaurav Kumar Ameta",
+        "Email": "gaurav.ameta24442@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "9.45-10.45",
+        "Subject": "MSWD",
+        "Faculty": "Maksud Vhora",
+        "Email": "maksud.vahora72@gmail.com",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "10.45-11.45",
+        "Subject": "QR",
+        "Faculty": "Rahul Prajapati",
+        "Email": "RAHULKUMAR.PRAJAPATI37280@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "12.45-1.35",
+        "Subject": "CD",
+        "Faculty": "Bhumi Shah",
+        "Email": "bhumi.shah19174@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "1.35-2.25",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Email": "akashugale8554@gmail.com",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "2.45-3.45",
+        "Subject": "CD",
+        "Faculty": ["Bhumi Shah", "Vaibhavi B Parikh"],
+        "Email": "bhumi.shah19174@paruluniversity.ac.in, vaibhavi.parikh25851@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A4"
+    },
+    {
+        "Day": "Monday",
+        "Time": "9.45-10.45",
+        "Subject": "MSWD",
+        "Faculty": "Bisal Kumar Show",
+        "Email": "bisalshaw@gmail.com",
+        "Room_No": 360,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Monday",
+        "Time": "12.45-1.35",
+        "Subject": "ES",
+        "Faculty": "Sanket Gandhi",
+        "Email": "sanket.gandhi14473@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Monday",
+        "Time": "1.35-2.25",
+        "Subject": "QR",
+        "Faculty": "Rahul Prajapati",
+        "Email": "RAHULKUMAR.PRAJAPATI37280@paruluniversity.ac.in",
+        "Room_No": 360,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Monday",
+        "Time": "2.45-3.45",
+        "Subject": "MAD",
+        "Faculty": "Soumen Mukherjee",
+        "Email": "mukherjeesoumen4268@gmail.com",
+        "Room_No": 360,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Wednesday",
+        "Time": "9.45-10.45",
+        "Subject": "IMP",
+        "Faculty": "Sandip Suresh Hire",
+        "Email": "sandip.datascientist@gmail.com",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Thursday",
+        "Time": "9.45-10.45",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Email": "akashugale8554@gmail.com",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Thursday",
+        "Time": "10.45-11.45",
+        "Subject": "ML",
+        "Faculty": "Mohitkumar Jagdishchandra Rathod",
+        "Email": "mohitkumar.rathod20807@paruluniversity.ac.in",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Thursday",
+        "Time": "12.45-1.35",
+        "Subject": "MSWD",
+        "Faculty": "Bisal Kumar Show",
+        "Email": "bisalshaw@gmail.com",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Thursday",
+        "Time": "1.35-2.25",
+        "Subject": "CD",
+        "Faculty": "Kapil Dev Raghuwanshi",
+        "Email": "Kapil.raghuwanshi24672@paruluniversity.ac.in",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Thursday",
+        "Time": "2.45-3.45",
+        "Subject": "CD",
+        "Faculty": "Kapil Dev Raghuwanshi and Bhumi Shah",
+        "Email": "Kapil.raghuwanshi24672@paruluniversity.ac.in, bhumi.shah19174@paruluniversity.ac.in",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Friday",
+        "Time": "9.45-10.45",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Email": "akashugale8554@gmail.com",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Friday",
+        "Time": "10.45-11.45",
+        "Subject": "ML",
+        "Faculty": "Mohitkumar Jagdishchandra Rathod",
+        "Email": "mohitkumar.rathod20807@paruluniversity.ac.in",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Friday",
+        "Time": "12.45-1.35",
+        "Subject": "QR",
+        "Faculty": "Rahul Prajapati",
+        "Email": "RAHULKUMAR.PRAJAPATI37280@paruluniversity.ac.in",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Friday",
+        "Time": "1.35-2.25",
+        "Subject": "MSWD",
+        "Faculty": "Bisal Kumar Show",
+        "Email": "bisalshaw@gmail.com",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Friday",
+        "Time": "2.45-3.45",
+        "Subject": "ML",
+        "Faculty": "Mohitkumar Jagdishchandra Rathod",
+        "Email": "mohitkumar.rathod20807@paruluniversity.ac.in",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Friday",
+        "Time": "3.45-4.45",
+        "Subject": "CD",
+        "Faculty": "Kapil Dev Raghuwanshi",
+        "Email": "Kapil.raghuwanshi24672@paruluniversity.ac.in",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "9.45-10.45",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Email": "akashugale8554@gmail.com",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "10.45-11.45",
+        "Subject": "CD",
+        "Faculty": "Kapil Dev Raghuwanshi",
+        "Email": "Kapil.raghuwanshi24672@paruluniversity.ac.in",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "12.45-1.35",
+        "Subject": "QR",
+        "Faculty": "Rahul Prajapati",
+        "Email": "RAHULKUMAR.PRAJAPATI37280@paruluniversity.ac.in",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "1.35-2.25",
+        "Subject": "MSWD",
+        "Faculty": "Bisal Kumar Show",
+        "Email": "bisalshaw@gmail.com",
+        "Room_No": 361,
+        "Division": "6A5"
+    },
+
+    {
+        "Day": "Monday",
+        "Time": "9.45-10.45",
+        "Subject": "ML",
+        "Faculty": "Meetkumar Manojkumar Patel",
+        "Room_No": 361,
+        "Division": "6A6",
+        "Faculty_Email": "meetkumar.patel19440@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Monday",
+        "Time": "10.45-11.45",
+        "Subject": "QR",
+        "Faculty": "Jay Vadodariya",
+        "Room_No": 361,
+        "Division": "6A6",
+        "Faculty_Email": "JAYKUMAR.VADODARIYA31113@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Monday",
+        "Time": "12.45-1.35",
+        "Subject": "ES",
+        "Faculty": "Dr. Dharna Bhatt",
+        "Room_No": 361,
+        "Division": "6A6",
+        "Faculty_Email": "dharna.bhatt20069@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Monday",
+        "Time": "1.35-2.25",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Room_No": 361,
+        "Division": "6A6",
+        "Faculty_Email": "akashugale8554@gmail.com"
+    },
+    {
+        "Day": "Monday",
+        "Time": "2.45-3.45",
+        "Subject": "MSWD",
+        "Faculty": "Maksud Vhora",
+        "Room_No": 361,
+        "Division": "6A6",
+        "Faculty_Email": "maksud.vahora72@gmail.com"
+    },
+    {
+        "Day": "Tuesday",
+        "Time": "9.45-10.45",
+        "Subject": "QR",
+        "Faculty": "Jay Vadodariya",
+        "Room_No": 361,
+        "Division": "6A6",
+        "Faculty_Email": "JAYKUMAR.VADODARIYA31113@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Tuesday",
+        "Time": "10.45-11.45",
+        "Subject": "MSWD",
+        "Faculty": "Maksud Vhora",
+        "Room_No": 361,
+        "Division": "6A6",
+        "Faculty_Email": "maksud.vahora72@gmail.com"
+    },
+    {
+        "Day": "Tuesday",
+        "Time": "12.45-1.35",
+        "Subject": "CD",
+        "Faculty": "Kapil Dev Raghuwanshi",
+        "Room_No": 361,
+        "Division": "6A6",
+        "Faculty_Email": "Kapil.raghuwanshi24672@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Tuesday",
+        "Time": "1.35-2.25",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Room_No": 361,
+        "Division": "6A6",
+        "Faculty_Email": "akashugale8554@gmail.com"
+    },
+    {
+        "Day": "Tuesday",
+        "Time": "2.45-3.45",
+        "Subject": "CD",
+        "Faculty": "Bhumi Shah/Shivkumar Lihare",
+        "Room_No": 361,
+        "Division": "6A6",
+        "Faculty_Email": "bhumi.shah19174@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Wednesday",
+        "Time": "9.45-4.45",
+        "Subject": "LIBRARY/SELF STUDY",
+        "Faculty": "-",
+        "Room_No": null,
+        "Division": "6A6",
+        "Faculty_Email": "-"
+    },
+    {
+        "Day": "Thursday",
+        "Time": "9.45-4.45",
+        "Subject": "IMP",
+        "Faculty": "Narasimha Pillai",
+        "Room_No": 362,
+        "Division": "6A6",
+        "Faculty_Email": "narasimhaethics@gmail.com"
+    },
+    {
+        "Day": "Friday",
+        "Time": "9.45-10.45",
+        "Subject": "ML",
+        "Faculty": "Meetkumar Manojkumar Patel",
+        "Room_No": 362,
+        "Division": "6A6",
+        "Faculty_Email": "meetkumar.patel19440@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Friday",
+        "Time": "10.45-11.45",
+        "Subject": "CD",
+        "Faculty": "Kapil Dev Raghuwanshi",
+        "Room_No": 362,
+        "Division": "6A6",
+        "Faculty_Email": "Kapil.raghuwanshi24672@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Friday",
+        "Time": "12.45-1.35",
+        "Subject": "ML",
+        "Faculty": "Meetkumar Manojkumar Patel/Shivangi Patel",
+        "Room_No": 362,
+        "Division": "6A6",
+        "Faculty_Email": "meetkumar.patel19440@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Friday",
+        "Time": "2.45-3.45",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Room_No": 362,
+        "Division": "6A6",
+        "Faculty_Email": "akashugale8554@gmail.com"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "9.45-10.45",
+        "Subject": "ML",
+        "Faculty": "Meetkumar Manojkumar Patel",
+        "Room_No": 362,
+        "Division": "6A6",
+        "Faculty_Email": "meetkumar.patel19440@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "10.45-11.45",
+        "Subject": "MSWD",
+        "Faculty": "Maksud Vhora",
+        "Room_No": 362,
+        "Division": "6A6",
+        "Faculty_Email": "maksud.vahora72@gmail.com"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "12.45-1.35",
+        "Subject": "QR",
+        "Faculty": "Jay Vadodariya",
+        "Room_No": 362,
+        "Division": "6A6",
+        "Faculty_Email": "JAYKUMAR.VADODARIYA31113@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "1.35-2.25",
+        "Subject": "CD",
+        "Faculty": "Kapil Dev Raghuwanshi",
+        "Room_No": 362,
+        "Division": "6A6",
+        "Faculty_Email": "Kapil.raghuwanshi24672@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "2.45-3.45",
+        "Subject": "MSWD",
+        "Faculty": "Maksud Vhora",
+        "Room_No": 362,
+        "Division": "6A6",
+        "Faculty_Email": "maksud.vahora72@gmail.com"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "3.45-4.45",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Room_No": 362,
+        "Division": "6A6",
+        "Faculty_Email": "akashugale8554@gmail.com"
+    },
+
+    {
+        "Day": "Monday",
+        "Time": "9.45-10.45",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "akashugale8554@gmail.com"
+    },
+    {
+        "Day": "Monday",
+        "Time": "12.45-1.35",
+        "Subject": "MSWD",
+        "Faculty": "Bisal Kumar Show",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "bisalshaw@gmail.com"
+    },
+    {
+        "Day": "Monday",
+        "Time": "1.35-2.25",
+        "Subject": "ES",
+        "Faculty": "Fedrick Mecwan",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "fedrick.mecwan20035@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Monday",
+        "Time": "2.45-3.45",
+        "Subject": "QR",
+        "Faculty": "Parthik Degama",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "PARTHIKBHAI.DEGAMA35558@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Monday",
+        "Time": "3.45-4.45",
+        "Subject": "CD",
+        "Faculty": "Bhumi Shah",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "bhumi.shah19174@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Tuesday",
+        "Time": "9.45-10.45",
+        "Subject": "CD",
+        "Faculty": "Bhumi Shah",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "bhumi.shah19174@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Tuesday",
+        "Time": "10.45-11.45",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "akashugale8554@gmail.com"
+    },
+    {
+        "Day": "Tuesday",
+        "Time": "12.45-1.35",
+        "Subject": "QR",
+        "Faculty": "Parthik Degama",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "PARTHIKBHAI.DEGAMA35558@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Tuesday",
+        "Time": "1.35-2.25",
+        "Subject": "ML",
+        "Faculty": "Mohitkumar Jagdishchandra Rathod",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "mohitkumar.rathod20807@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Tuesday",
+        "Time": "2.45-3.45",
+        "Subject": "MSWD",
+        "Faculty": "Bisal Kumar Show",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "bisalshaw@gmail.com"
+    },
+    {
+        "Day": "Wednesday",
+        "Time": "9.45-10.45",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "akashugale8554@gmail.com"
+    },
+    {
+        "Day": "Wednesday",
+        "Time": "12.45-1.35",
+        "Subject": "CD",
+        "Faculty": "Bhumi Shah",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "bhumi.shah19174@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Wednesday",
+        "Time": "2.45-3.45",
+        "Subject": "ML",
+        "Faculty": "Mohitkumar Jagdishchandra Rathod",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "mohitkumar.rathod20807@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Wednesday",
+        "Time": "3.45-4.45",
+        "Subject": "MSWD",
+        "Faculty": "Bisal Kumar Show",
+        "Room_No": 362,
+        "Division": "6A7",
+        "Email": "bisalshaw@gmail.com"
+    },
+    {
+        "Day": "Friday",
+        "Time": "9.45-4.45",
+        "Subject": "IMP",
+        "Faculty": "Narasimha Pillai",
+        "Room_No": 370,
+        "Division": "6A7",
+        "Email": "narasimhaethics@gmail.com"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "9.45-10.45",
+        "Subject": "CD",
+        "Faculty": "Bhumi Shah",
+        "Room_No": 370,
+        "Division": "6A7",
+        "Email": "bhumi.shah19174@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "10.45-11.45",
+        "Subject": "ML",
+        "Faculty": "Mohitkumar Jagdishchandra Rathod",
+        "Room_No": 370,
+        "Division": "6A7",
+        "Email": "mohitkumar.rathod20807@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "12.45-1.35",
+        "Subject": "ML",
+        "Faculty": "Mohitkumar Jagdishchandra Rathod",
+        "Room_No": 370,
+        "Division": "6A7",
+        "Email": "mohitkumar.rathod20807@paruluniversity.ac.in"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "2.45-3.45",
+        "Subject": "MAD",
+        "Faculty": "Akash Sayaji Ugalmugale",
+        "Room_No": 370,
+        "Division": "6A7",
+        "Email": "akashugale8554@gmail.com"
+    },
+    {
+        "Day": "Saturday",
+        "Time": "3.45-4.45",
+        "Subject": "MSWD",
+        "Faculty": "Bisal Kumar Show",
+        "Room_No": 370,
+        "Division": "6A7",
+        "Email": "bisalshaw@gmail.com"
     }
+
 ]

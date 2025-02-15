@@ -28,7 +28,7 @@ const Login = () => {
       const response = await axios.post('http://localhost:5000/api/login', formData);
       console.log('Login successful:', response.data);
       // Add your authentication logic here (e.g., storing token)
-      navigate('/'); // Navigate to dashboard after successful login
+      navigate('/home'); // Navigate to dashboard after successful login
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     }

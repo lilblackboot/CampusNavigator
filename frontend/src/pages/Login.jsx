@@ -20,7 +20,7 @@ const Login = () => {
     setError('');
 
     if (!validateEmail(formData.email)) {
-      setError('Email must be in format: 2203051240100@paruluniversity.ac.in');
+      setError('Use your college email id to login');
       return;
     }
 

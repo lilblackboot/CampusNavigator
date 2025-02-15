@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, User, CheckCircle, Cloud, Layout,Pizza, Binoculars } from 'lucide-react';
+import {ChevronDown , Binoculars } from 'lucide-react';
 
 
 const Nav = () => {
@@ -23,28 +23,11 @@ const Nav = () => {
           <span className="text-sm text-white font-medium">Ellington Thom</span>
           <span className="text-xs text-gray-500">username@gmail.com</span>
         </div>
-        <ChevronDown/>
+        <ChevronDown />
       </div>
     </nav>
   );
 };
 
-
-// ChevronDown component
-const ChevronDown = () => (
-  <svg 
-    width="20" 
-    height="20" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-    className="text-white"
-  >
-    <path d="M6 9l6 6 6-6" />
-  </svg>
-);
 
 export default Nav;

@@ -1,4 +1,5 @@
 import React from "react";
+import Events from "./Events";
 import Attendance from "./Attendance";
 import FindMyTeacher from "./FindMyTeacher";
 import FindMyFood from "./FindMyFood";
@@ -10,6 +11,7 @@ import {
   Soup,
   Star,
   SearchCheck,
+  Ticket
 } from "lucide-react";
 import { useState } from "react";
 
@@ -22,6 +24,7 @@ function TabsBar() {
     { id: "tab3", label: "Find My Food" },
     { id: "tab4", label: "Star Teachers" },
     { id: "tab5", label: "Navigator" },
+    { id: "tab6", label: "Events" },
   ];
 
   const tabIcons = {
@@ -30,6 +33,7 @@ function TabsBar() {
     tab3: <Soup />,
     tab4: <Star />,
     tab5: <SearchCheck />,
+    tab6: <Ticket />
   };
 
   const tabContent = {
@@ -38,6 +42,7 @@ function TabsBar() {
     tab3: <FindMyFood />,
     tab4: <StarTeachers />,
     tab5: <GeneralNavigator />,
+    tab6: <Events/>
   };
 
   return (

@@ -476,8 +476,8 @@
         "Day": "Thursday",
         "Time": "2.45-3.45",
         "Subject": "CD",
-        "Faculty": "Kapil Dev Raghuwanshi and Bhumi Shah",
-        "Email": "Kapil.raghuwanshi24672@paruluniversity.ac.in, bhumi.shah19174@paruluniversity.ac.in",
+        "Faculty": ["Kapil Dev Raghuwanshi"," Bhumi Shah"],
+        "Email": ["Kapil.raghuwanshi24672@paruluniversity.ac.in"," bhumi.shah19174@paruluniversity.ac.in"],
         "Room_No": 361,
         "Division": "6A5"
     },

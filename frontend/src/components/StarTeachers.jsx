@@ -9,14 +9,14 @@ function StarTeachers() {
       name: 'Shweta Gupta',
       subject: 'Compiler Design',
       remark: 'Excellent problem-solving skills.',
-      image: '', // Placeholder image URL
+      image: './shweta.jpg', // Placeholder image URL
     },
     {
       id: 2,
       name: 'Jane Smith',
       subject: 'Physics',
       remark: 'Great at explaining complex concepts.',
-      image: 'https://via.placeholder.com/150',
+      image: 'https://placehold.co/150',
     },
     {
       id: 3,

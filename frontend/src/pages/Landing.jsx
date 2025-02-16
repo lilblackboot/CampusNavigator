@@ -1,5 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import GradientText from '../components/ui/GradientText';
+import ScrollVelocity from '../components/ui/ScrollVelocity';
+import {Binoculars} from 'lucide-react'
 
 function Landing() {
   const navigate = useNavigate();
@@ -7,9 +10,10 @@ function Landing() {
   return (
     <div>
       <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://source.unsplash.com/random/1920x1080')" }}>
-        <div className="bg-black bg-opacity-50 min-h-screen flex flex-col justify-center items-center text-center text-white p-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-4">Welcome to Campus Navigator</h1>
+        <div id="Mainpart" className="relative bg-black overflow-x-hidden bg-opacity-50 min-h-screen flex flex-col justify-center items-center text-center text-white p-4">
+          <div className='flex gap-4 justify-center items-center'><Binoculars size={65}/><h1 className="text-5xl md:text-7xl font-bold mb-4"> GoGuide</h1></div>
           <p className="text-xl md:text-2xl mb-8">Your ultimate guide to navigating the campus with ease.</p>
+          
           <div className="flex space-x-4">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
@@ -24,11 +28,17 @@ function Landing() {
               Register
             </button>
           </div>
+          <div className="absolute bottom-4 w-full flex justify-center">
+            <ScrollVelocity
+              texts={['Scroll Down']} 
+              velocity={100} 
+              className="custom-scroll-text"
+            />
+          </div>
         </div>
       </div>
 
       <section id="intro" className="min-h-screen p-8 bg-white text-black flex flex-col justify-center">
-        <h2 className="text-4xl font-bold mb-4">Introduction</h2>
         <p className="text-lg">Campus Navigator is your ultimate guide to navigating the campus with ease. Whether you're a student, faculty, or visitor, our platform helps you find your way around the campus effortlessly.</p>
       </section>
 

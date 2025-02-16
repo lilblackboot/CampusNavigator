@@ -8,24 +8,12 @@ const Card = React.forwardRef(({ className, ...props }, ref) => (
        transition-all duration-300
       dark:bg-gray-800 
      backdrop-blur-sm
-      animate-fadeIn
+      
       ${className}`}
     {...props}
   />
 ));
 Card.displayName = "Card";
-
-const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={`
-      flex flex-col space-y-1.5 p-6
-      animate-slideDown
-      ${className}`}
-    {...props}
-  />
-));
-CardHeader.displayName = "CardHeader";
 
 const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
   <h3
@@ -106,10 +94,7 @@ document.head.appendChild(style);
 
 // Example usage component
 const ExampleCard = () => (
-  <Card className="w-full max-w-md mx-auto glass card-hover">
-    <CardHeader>
-      <CardTitle>Enhanced Card Title</CardTitle>
-    </CardHeader>
+  <Card className="w-full max-w-md mx-auto glass ">
     <CardContent>
       <p className="text-gray-600 dark:text-gray-300">
         This is an example of the enhanced card component with animations,
@@ -119,4 +104,4 @@ const ExampleCard = () => (
   </Card>
 );
 
-export { Card, CardHeader, CardTitle, CardContent, ExampleCard };
+export { Card, CardTitle, CardContent, ExampleCard };

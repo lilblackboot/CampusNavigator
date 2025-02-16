@@ -82,9 +82,7 @@ const ChatBot = () => {
   };
 
   return (
-    <Card className="w-full max-w-2xl overflow-scroll mx-auto h-[600px]  flex flex-col bg-gradient-to-b from-white to-gray-50">
-      
-      
+    <Card className="w-full  mx-auto min-h-screen flex flex-col bg-gradient-to-b from-white to-gray-50">
       <CardContent className="flex-1 flex flex-col p-4">
         <div 
           ref={messageContainerRef}
@@ -122,7 +120,7 @@ const ChatBot = () => {
           </div>
         )}
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 sticky bottom-0 bg-white p-4 border-t border-gray-200">
           <input
             type="file"
             ref={fileInputRef}

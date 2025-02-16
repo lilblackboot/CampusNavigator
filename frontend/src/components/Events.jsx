@@ -11,27 +11,13 @@ const posts = [
 ];
 
 
-function Events() {useEffect(() => {
-  // Load Instagram's embed script
-  const script = document.createElement("script");
-  script.src = "https://www.instagram.com/embed.js";
-  script.async = true;
-  document.body.appendChild(script);
-}, []);
-
+function Events() {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
 
 
         
       <h1 className="text-3xl font-bold text-center mb-8">Events</h1>
-      <div className="flex justify-center p-4">
-      <blockquote
-        className="instagram-media rounded-lg shadow-lg max-w-md sm:max-w-lg w-full border border-gray-200"
-        data-instgrm-permalink="https://www.instagram.com/p/DGFUAb0teyU/"
-        data-instgrm-version="14"
-      ></blockquote>
-    </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {posts.map(post => (
           <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden">

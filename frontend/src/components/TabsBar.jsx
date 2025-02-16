@@ -50,6 +50,7 @@ function TabsBar() {
       <div className="bg-black flex justify-center text-white">
         {tabs.map((tab) => (
           <button
+          type="button"
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`px-4 flex gap-3 rounded-t-lg py-2 font-semibold ${

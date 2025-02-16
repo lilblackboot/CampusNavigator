@@ -216,15 +216,7 @@ function FindMyFood() {
                 className="w-full h-64 object-cover mb-4"
               />
               <div className="h-64 w-full">
-                <iframe
-                  title="Shop Location"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  style={{ border: 0 }}
-                  src={`https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${selectedPost.location.lat},${selectedPost.location.lng}`}
-                  allowFullScreen
-                ></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.6960402601094!2d73.36242097618985!3d22.28950114328503!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fdb01ce1797f9%3A0xaa8b442e4fc91e5f!2sSubway%20Parul%20University!5e0!3m2!1sen!2sin!4v1739620877588!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
               <p className="text-gray-600 mt-4">
                 <span className="font-medium">Shop:</span> {selectedPost.shop}

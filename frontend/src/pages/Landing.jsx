@@ -1,14 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-scroll';
 import GradientText from '../components/ui/GradientText';
 import ScrollVelocity from '../components/ui/ScrollVelocity';
 import { Binoculars } from 'lucide-react';
 
 function Landing() {
   const navigate = useNavigate();
+  const [showButtons, setShowButtons] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const mainpart = document.getElementById('Mainpart');
+      if (mainpart) {
+        const mainpartHeight = mainpart.offsetHeight;
+        const scrollPosition = window.scrollY;
+        setShowButtons(scrollPosition > mainpartHeight);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div>
+      <nav className="bg-black text-white p-4 fixed w-full z-10">
+        <div className="container mx-auto flex justify-between items-center">
+          <div className="text-2xl font-bold">GoGuide</div>
+          <div className="space-x-4 flex items-center">
+            <Link to="intro" smooth={true} duration={500} className="cursor-pointer hover:text-gray-400">Intro</Link>
+            <Link to="features" smooth={true} duration={500} className="cursor-pointer hover:text-gray-400">Features</Link>
+            <Link to="about-us" smooth={true} duration={500} className="cursor-pointer hover:text-gray-400">About</Link>
+            <Link to="makers" smooth={true} duration={500} className="cursor-pointer hover:text-gray-400">Makers</Link>
+            <Link to="contact-us" smooth={true} duration={500} className="cursor-pointer hover:text-gray-400">Contact</Link>
+            {showButtons && (
+              <>
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                  onClick={() => navigate('/login')}
+                >
+                  Login
+                </button>
+                <button
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                  onClick={() => navigate('/signup')}
+                >
+                  Register
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </nav>
+
       <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://source.unsplash.com/random/1920x1080')" }}>
         <div id="Mainpart" className="relative bg-black overflow-x-hidden bg-opacity-50 min-h-screen flex flex-col justify-center items-center text-center text-white p-4">
           <div className='flex gap-4 justify-center items-center'>
@@ -63,7 +110,7 @@ function Landing() {
         <h2 className="text-4xl font-bold mb-4">Get Started</h2>
         <p className="text-lg">Sign up today and start navigating the campus like a pro!</p>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 mt-4"
+          className="bg-blue-500 hover:bg-blue-700 text-white  font-bold py-2 px-4  rounded-full transition duration-300 mt-4"
           onClick={() => navigate('/signup')}
         >
           Register Now

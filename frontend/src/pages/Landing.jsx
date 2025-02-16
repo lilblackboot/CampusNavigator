@@ -59,9 +59,8 @@ function Landing() {
       <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://source.unsplash.com/random/1920x1080')" }}>
         <div id="Mainpart" className="relative bg-black overflow-x-hidden bg-opacity-50 min-h-screen flex flex-col justify-center items-center text-center text-white p-4">
           <div className='flex gap-4 justify-center items-center'>
-            <Binoculars size={65} />
-            <h1 className="text-5xl md:text-7xl font-bold  mb-4"> GoGuide</h1>
-            
+            <Binoculars className='hover:drop-shadow-[0_0_10px_#ffffff]' size={65} />
+            <h1 className="text-5xl md:text-7xl font-bold text-white  hover:drop-shadow-[0_0_10px_#ffffff]  mb-4"> GoGuide</h1>
           </div>
           <p className="text-xl md:text-2xl mb-8">Your Ultimate Campus Companion.</p>
 

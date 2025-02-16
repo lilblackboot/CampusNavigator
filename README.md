@@ -48,7 +48,7 @@ Make sure you have **Node.js** and **npm** installed (because magic needs a foun
 ### Frontend Setup
 1. Navigate to the frontend directory:
    ```sh
-   cd client
+   cd frontend
    ```
 2. Install frontend dependencies:
    ```sh
@@ -56,7 +56,7 @@ Make sure you have **Node.js** and **npm** installed (because magic needs a foun
    ```
 3. Start the React development server:
    ```sh
-   npm start
+   npm run dev
    ```
 
 ---

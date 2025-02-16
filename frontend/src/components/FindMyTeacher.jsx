@@ -4,9 +4,9 @@ function FindMyTeacher() {
   return (
     <div className='py-10 flex'>
       
-      <div className='w-full'>
+    
         <ChatBot/>
-      </div>
+    
       
     </div>
   )

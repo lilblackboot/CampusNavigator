@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import TiltedCard from '../components/ui/TiltedCard';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-scroll';
 import GradientText from '../components/ui/GradientText';
@@ -29,6 +30,7 @@ function Landing() {
     <div>
       <nav className="bg-black text-white p-4 fixed w-full z-10">
         <div className="container mx-auto flex justify-between items-center">
+      
           <div className="text-2xl font-bold">GoGuide</div>
           <div className="space-x-4 flex items-center">
             <Link to="intro" smooth={true} duration={500} className="cursor-pointer hover:text-gray-400">Intro</Link>
@@ -56,7 +58,8 @@ function Landing() {
         </div>
       </nav>
 
-      <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://source.unsplash.com/random/1920x1080')" }}>
+      <div className="min-h-screen bg-cover bg-center" >
+   
         <div id="Mainpart" className="relative bg-black overflow-x-hidden bg-opacity-50 min-h-screen flex flex-col justify-center items-center text-center text-white p-4">
           <div className='flex gap-4 justify-center items-center'>
             <Binoculars className='hover:drop-shadow-[0_0_10px_#ffffff]' size={65} />
@@ -122,32 +125,89 @@ function Landing() {
         <p className="text-lg">At GoGuide, we believe that campus life should be smooth and stress-free. Our mission is to empower students and faculty with a smart, efficient, and user-friendly solution to simplify navigation and daily academic tasks. Whether you’re a newcomer or a seasoned student, GoGuide is here to enhance your campus experience.</p>
       </section>
 
-      <section id="makers" className="min-h-screen p-8 bg-white text-black flex flex-col justify-center">
+      <section id="makers" className="min-h-screen  p-8 bg-white text-black flex flex-col justify-center">
         <h2 className="text-4xl font-bold mb-4">Meet the Makers</h2>
         <p className="text-lg mb-8">GoGuide is brought to you by a passionate team of tech enthusiasts from Parul Institute of Technology, Parul University. Our team members:</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-lg shadow-md p-4 text-center">
-            <img src="https://source.unsplash.com/random/150x150?sig=1" alt="Yash Chauhan" className="w-24 h-24 rounded-full mx-auto mb-4" />
-            <h3 className="text-xl font-semibold">Yash Chauhan</h3>
-            <p className="text-gray-700">Role: Developer</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-4 text-center">
-            <img src="https://source.unsplash.com/random/150x150?sig=2" alt="Suzan Mansuri" className="w-24 h-24 rounded-full mx-auto mb-4" />
-            <h3 className="text-xl font-semibold">Suzan Mansuri</h3>
-            <p className="text-gray-700">Role: Developer</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-4 text-center">
-            <img src="https://source.unsplash.com/random/150x150?sig=3" alt="Swapnendu Karmakar" className="w-24 h-24 rounded-full mx-auto mb-4" />
-            <h3 className="text-xl font-semibold">Swapnendu Karmakar</h3>
-            <p className="text-gray-700">Role: Developer</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-4 text-center">
-            <img src="https://source.unsplash.com/random/150x150?sig=4" alt="Isha Rathode" className="w-24 h-24 rounded-full mx-auto mb-4" />
-            <h3 className="text-xl font-semibold">Isha Rathode</h3>
-            <p className="text-gray-700">Role: Developer</p>
-          </div>
-        </div>
-        <p className="text-lg mt-8">🎯 Guided by our dedicated supervisor, Sweta Gupta Mam, we have worked tirelessly to build a solution that makes student life more efficient and enjoyable.</p>
+        <div className="flex gap-7 gap-y-10 flex-wrap justify-around">
+        <TiltedCard
+  imageSrc="./yash.jpg"
+  altText="Yash"
+  captionText="Developer"
+  containerHeight="250px"
+  containerWidth="250px"
+  imageHeight="250px"
+  imageWidth="250px"
+  rotateAmplitude={12}
+  scaleOnHover={1.2}
+  showMobileWarning={false}
+  showTooltip={true}
+  displayOverlayContent={true}
+  overlayContent={
+    <p className="tilted-card-demo-text text-white bg-[#0707076e] rounded-2xl px-2 m-3">
+      Yash Chauhan
+    </p>
+  }
+/>
+          <TiltedCard
+  imageSrc="./suzan.jpg"
+  altText="Suzan"
+  captionText="Developer"
+  containerHeight="250px"
+  containerWidth="250px"
+  imageHeight="250px"
+  imageWidth="250px"
+  rotateAmplitude={12}
+  scaleOnHover={1.2}
+  showMobileWarning={false}
+  showTooltip={true}
+  displayOverlayContent={true}
+  overlayContent={
+    <p className="tilted-card-demo-text text-white bg-[#0707076e] rounded-2xl px-2 m-3">
+      Suzan Mansuri
+    </p>
+  }
+/>
+<TiltedCard
+  imageSrc="./swapnendu.png"
+  altText="Swepnendu"
+  captionText="Developer"
+  containerHeight="250px"
+  containerWidth="250px"
+  imageHeight="250px"
+  imageWidth="250px"
+  rotateAmplitude={12}
+  scaleOnHover={1.2}
+  showMobileWarning={false}
+  showTooltip={true}
+  displayOverlayContent={true}
+  overlayContent={
+    <p className="tilted-card-demo-text text-white bg-[#0707076e] rounded-2xl px-2 m-3">
+      Swapnendu Karmakar
+    </p>
+  }
+/>
+         
+       
+        
+        <TiltedCard
+  imageSrc="./shweta.jpg"
+  altText="Swepnendu"
+  captionText="Mentor"
+  containerHeight="250px"
+  containerWidth="250px"
+  imageHeight="250px"
+  imageWidth="250px"
+  rotateAmplitude={12}
+  scaleOnHover={1.2}
+  showMobileWarning={false}
+  showTooltip={true}
+  displayOverlayContent={true}
+  overlayContent={
+    <p className="tilted-card-demo-text justify text-white bg-[#0707076e] rounded-2xl px-2 m-3">
+      Ms. Shweta Gupta
+    </p>
+  }
+/> </div>
       </section>
 
       <section id="contact-us" className="min-h-screen p-8 bg-gray-100 text-black flex flex-col justify-center">

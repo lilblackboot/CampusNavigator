@@ -82,7 +82,7 @@ const ChatBot = () => {
   };
 
   return (
-    <Card className="w-full  mx-auto h-[90%] flex flex-col bg-gradient-to-b from-white to-gray-50">
+    <Card className="w-full  mx-auto h-full flex flex-col bg-gradient-to-b from-white to-gray-50">
       <CardContent className="flex-1 flex flex-col p-4">
         <div 
           ref={messageContainerRef}

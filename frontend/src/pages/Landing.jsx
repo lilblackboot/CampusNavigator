@@ -29,9 +29,9 @@ function Landing() {
   return (
     <div>
       <nav className="bg-black text-white p-4 fixed w-full z-10">
-        <div className="container mx-auto flex justify-between items-center">
+        <div className="container  flex justify-between items-center">
       
-          <div className="text-2xl font-bold">GoGuide</div>
+          <div className="text-2xl font-bold flex justify-center hover:drop-shadow-[0_0_10px_#ffffff] items-center gap-2"> <Binoculars className='' size={25} />GoGuide</div>
           <div className="space-x-4 flex items-center">
             <Link to="intro" smooth={true} duration={500} className="cursor-pointer hover:text-gray-400">Intro</Link>
             <Link to="features" smooth={true} duration={500} className="cursor-pointer hover:text-gray-400">Features</Link>
@@ -61,9 +61,9 @@ function Landing() {
       <div className="min-h-screen bg-cover bg-center" >
    
         <div id="Mainpart" className="relative bg-black overflow-x-hidden bg-opacity-50 min-h-screen flex flex-col justify-center items-center text-center text-white p-4">
-          <div className='flex gap-4 justify-center items-center'>
-            <Binoculars className='hover:drop-shadow-[0_0_10px_#ffffff]' size={65} />
-            <h1 className="text-5xl md:text-7xl font-bold text-white  hover:drop-shadow-[0_0_10px_#ffffff]  mb-4"> GoGuide</h1>
+          <div className='flex gap-4 hover:drop-shadow-[0_0_10px_#ffffff] justify-center items-center'>
+            <Binoculars className='' size={65} />
+            <h1 className="text-5xl md:text-7xl font-bold text-white  mb-4"> GoGuide</h1>
           </div>
           <p className="text-xl md:text-2xl mb-8">Your Ultimate Campus Companion.</p>
 
@@ -125,7 +125,7 @@ function Landing() {
         <p className="text-lg">At GoGuide, we believe that campus life should be smooth and stress-free. Our mission is to empower students and faculty with a smart, efficient, and user-friendly solution to simplify navigation and daily academic tasks. Whether you’re a newcomer or a seasoned student, GoGuide is here to enhance your campus experience.</p>
       </section>
 
-      <section id="makers" className="min-h-screen  p-8 bg-white text-black flex flex-col justify-center">
+      <section id="makers" className="min-h-screen  p-8 bg-black text-white flex flex-col justify-center">
         <h2 className="text-4xl font-bold mb-4">Meet the Makers</h2>
         <p className="text-lg mb-8">GoGuide is brought to you by a passionate team of tech enthusiasts from Parul Institute of Technology, Parul University. Our team members:</p>
         <div className="flex gap-7 gap-y-10 flex-wrap justify-around">

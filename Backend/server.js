@@ -199,7 +199,14 @@ app.post('/api/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid password' });
     }
 
-    res.json({ message: 'Login successful' });
+    // Return user data (excluding sensitive information)
+    res.json({
+      message: 'Login successful',
+      user: {
+        email: user.email,
+        id: user._id
+      }
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

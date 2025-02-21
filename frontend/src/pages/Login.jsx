@@ -11,29 +11,38 @@ const Login = () => {
     password: ''
   });
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateEmail = (email) => {
     const emailRegex = /^\d+@paruluniversity\.ac\.in$/;
     return emailRegex.test(email);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
+ // In Login.jsx
+// In Login.jsx, update the handleSubmit function
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  setIsLoading(true);
 
-    if (!validateEmail(formData.email)) {
-      setError('Use your college email id to login');
-      return;
+  try {
+    // Using the proxy - no need for full URL
+    const response = await axios.post('/api/login', formData);
+    
+    if (response.data.user && response.data.user.id) {
+      login(response.data.user);
+    } else {
+      setError('Invalid response from server');
     }
-
-    try {
-      const response = await axios.post('http://localhost:5000/api/login', formData);
-      login({ email: formData.email });
-      navigate('/home');
-    } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
-    }
-  };
+    
+    navigate('/home');
+  } catch (err) {
+    console.error('Login error:', err);
+    setError(err.response?.data?.message || 'Login failed');
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -56,6 +65,7 @@ const Login = () => {
                 placeholder="Email address"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                disabled={isLoading}
               />
             </div>
             <div>
@@ -69,6 +79,7 @@ const Login = () => {
                 placeholder="Password"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                disabled={isLoading}
               />
             </div>
           </div>
@@ -80,9 +91,10 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400"
+              disabled={isLoading}
             >
-              Login
+              {isLoading ? 'Logging in...' : 'Login'}
             </button>
           </div>
         </form>

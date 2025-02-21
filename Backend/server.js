@@ -9,7 +9,12 @@ const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', // Your React app's URL (default Vite port)
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // MongoDB Connection
@@ -184,7 +189,7 @@ app.post('/api/verify-signup', async (req, res) => {
   }
 });
 
-// Login Route remains the same...
+
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -199,12 +204,12 @@ app.post('/api/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid password' });
     }
 
-    // Return user data (excluding sensitive information)
+    // Return user data with proper formatting
     res.json({
       message: 'Login successful',
       user: {
         email: user.email,
-        id: user._id
+        id: user._id.toString()
       }
     });
   } catch (error) {
@@ -212,6 +217,107 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+
+// Slot Schema
+const slotSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+    unique: true
+  },
+  slots: {
+    monday: { type: Number, default: 0 },
+    tuesday: { type: Number, default: 0 },
+    wednesday: { type: Number, default: 0 },
+    thursday: { type: Number, default: 0 },
+    friday: { type: Number, default: 0 },
+    saturday: { type: Number, default: 0 },
+    sunday: { type: Number, default: 0 }
+  },
+  lastUpdated: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const Slot = mongoose.model('Slot', slotSchema);
+
+// Get user slots
+app.get('/api/slots/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    console.log('Fetching slots for user ID:', userId); // Log the userId
+    
+    if (!userId || userId === 'undefined' || userId === 'null') {
+      return res.status(400).json({ message: 'Invalid user ID provided' });
+    }
+    
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: 'Invalid user ID format' });
+    }
+    
+    const slotData = await Slot.findOne({ userId });
+    
+    if (!slotData) {
+      console.log('Slot configuration not found for user ID:', userId); // Log missing slot configuration
+      return res.status(404).json({ message: 'Slot configuration not found' });
+    }
+    
+    res.json({ 
+      slots: slotData.slots,
+      lastUpdated: slotData.lastUpdated
+    });
+  } catch (error) {
+    console.error('Error fetching slots:', error);
+    res.status(500).json({ message: error.message });
+  }
+});
+// Create or update slots
+app.post('/api/slots', async (req, res) => {
+  try {
+    const { userId, slots } = req.body;
+    
+    if (!userId || !slots) {
+      return res.status(400).json({ message: 'User ID and slots data are required' });
+    }
+    
+    // Validate slots data
+    const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    for (const day of days) {
+      if (typeof slots[day] !== 'number' || slots[day] < 0 || slots[day] > 12) {
+        return res.status(400).json({ 
+          message: `Invalid slot count for ${day}. Must be a number between 0 and 12.` 
+        });
+      }
+    }
+    
+    // Check if user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    // Create or update slots
+    const updatedSlots = await Slot.findOneAndUpdate(
+      { userId },
+      { 
+        userId,
+        slots,
+        lastUpdated: Date.now()
+      },
+      { upsert: true, new: true }
+    );
+    
+    res.json({ 
+      message: 'Slot configuration saved successfully',
+      slots: updatedSlots.slots
+    });
+  } catch (error) {
+    console.error('Error saving slots:', error);
+    res.status(500).json({ message: error.message });
+  }
+});
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -37,7 +37,7 @@ const Nav = () => {
 
       <div className="flex items-center gap-3 relative" ref={dropdownRef}>
         <img
-          src="/api/placeholder/32/32"
+          src="/"
           alt="Profile"
           className="w-8 h-8 rounded-full"
         />

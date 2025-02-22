@@ -36,11 +36,6 @@ const Nav = () => {
       </div>
 
       <div className="flex items-center gap-3 relative" ref={dropdownRef}>
-        <img
-          src="/"
-          alt="Profile"
-          className="w-8 h-8 rounded-full"
-        />
         <div className="flex flex-col">
           <span className="text-sm text-white font-medium">
             {user?.email?.split('@')[0] || 'Guest'}

@@ -1,8 +1,4 @@
 
-
-// Configure axios base URL
-axios.defaults.baseURL = 'http://localhost:5000';
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../context/UserContext';
@@ -12,6 +8,12 @@ function Attendance() {
   const [currentAttendance, setCurrentAttendance] = useState(85);
   const [classesAttended, setClassesAttended] = useState(34);
   const [totalClasses, setTotalClasses] = useState(40);
+  
+  // New state variables for attendance calculator
+  const [totalSlots, setTotalSlots] = useState(0);
+  const [attendedSlots, setAttendedSlots] = useState(0);
+  const [targetAttendance, setTargetAttendance] = useState(75);
+  const [calculationResult, setCalculationResult] = useState(null);
   
   const [showSlotForm, setShowSlotForm] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -26,6 +28,36 @@ function Attendance() {
   });
   const [editMode, setEditMode] = useState(false);
   const [error, setError] = useState(null);
+
+  // Calculate attendance and required/possible bunks
+  const calculateAttendance = () => {
+    if (totalSlots === 0) {
+      setError("Total slots cannot be 0");
+      return;
+    }
+
+    const currentPercentage = (attendedSlots / totalSlots) * 100;
+    
+    if (currentPercentage >= targetAttendance) {
+      // Calculate how many classes can be bunked while maintaining target attendance
+      // Formula: (attended - (target * total)/100) = classes that can be bunked
+      const possibleBunks = Math.floor(attendedSlots - (targetAttendance * totalSlots) / 100);
+      setCalculationResult({
+        type: 'positive',
+        percentage: currentPercentage.toFixed(2),
+        classes: possibleBunks
+      });
+    } else {
+      // Calculate how many classes need to be attended to reach target attendance
+      // Formula: ((target * total)/100 - attended) = classes needed to attend
+      const requiredClasses = Math.ceil((targetAttendance * totalSlots) / 100 - attendedSlots);
+      setCalculationResult({
+        type: 'negative',
+        percentage: currentPercentage.toFixed(2),
+        classes: requiredClasses
+      });
+    }
+  };
 
   useEffect(() => {
     if (user) {
@@ -194,11 +226,94 @@ function Attendance() {
       </div>
     );
   }
+  const AttendanceCalculator = () => (
+    <div className="bg-white rounded-lg shadow-md p-6 w-full max-w-2xl my-8">
+      <h3 className="text-2xl font-semibold mb-4">Attendance Calculator</h3>
+      <div className="space-y-4">
+        <div className="flex items-center gap-4">
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Total Slots
+            </label>
+            <input
+              type="number"
+              min="0"
+              value={totalSlots}
+              onChange={(e) => setTotalSlots(parseInt(e.target.value) || 0)}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Attended Slots
+            </label>
+            <input
+              type="number"
+              min="0"
+              max={totalSlots}
+              value={attendedSlots}
+              onChange={(e) => setAttendedSlots(parseInt(e.target.value) || 0)}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Target Attendance (%)
+            </label>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              value={targetAttendance}
+              onChange={(e) => setTargetAttendance(parseInt(e.target.value) || 0)}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+        </div>
+        
+        <button
+          onClick={calculateAttendance}
+          className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          Calculate
+        </button>
 
+        {calculationResult && (
+          <div className={`mt-4 p-4 rounded ${
+            calculationResult.type === 'positive' ? 'bg-green-100' : 'bg-yellow-100'
+          }`}>
+            <p className="text-lg mb-2">
+              Current Attendance: {calculationResult.percentage}%
+            </p>
+            {calculationResult.type === 'positive' ? (
+              <p className="text-green-700">
+                You can safely miss {calculationResult.classes} more {calculationResult.classes === 1 ? 'class' : 'classes'} 
+                while maintaining {targetAttendance}% attendance.
+              </p>
+            ) : (
+              <p className="text-yellow-700">
+                You need to attend {calculationResult.classes} more {calculationResult.classes === 1 ? 'class' : 'classes'} 
+                to reach {targetAttendance}% attendance.
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  if (loading) {
+    return (
+      <div className="min-h-screen p-8 bg-gray-100 flex flex-col items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+        <p className="mt-4 text-xl">Loading your attendance data...</p>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen p-8 bg-gray-100 text-black flex flex-col items-center">
       <h2 className="text-4xl font-bold mb-8">Attendance Manager</h2>
-      
+            <AttendanceCalculator />
       {showSlotForm ? (
         <SlotConfiguration />
       ) : (

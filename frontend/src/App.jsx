@@ -1,22 +1,24 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Landing from "./pages/Landing";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import PageNotFound from "./pages/PageNotFound";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { UserProvider } from './context/UserContext';
+import Landing from './pages/Landing';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import Signup from './pages/Signup';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/home" element={<Home />} />
+          {/* <Route path="/profile" element={<Profile />} /> */}
+          {/* <Route path="/settings" element={<Settings />} /> */}
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 }
 

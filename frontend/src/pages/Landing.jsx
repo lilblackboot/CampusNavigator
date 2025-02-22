@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import TiltedCard from "../components/ui/TiltedCard";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-scroll";
@@ -6,13 +6,47 @@ import GradientText from "../components/ui/GradientText";
 import ScrollVelocity from "../components/ui/ScrollVelocity";
 import { Binoculars } from "lucide-react";
 // import Squares from "../components/ui/Squares";
- import Ballpit from "../components/ui/Ballpit";
+import Ballpit from "../components/ui/Ballpit";
 // import Aurora from "../components/ui/Aurora";
 import Particles from "../components/ui/Particles";
+import FadeContent from "../components/ui/FadeContent";
+import { useInView, motion } from "framer-motion";
+import GridMotion from "../components/ui/GridMotion";
 
 function Landing() {
   const navigate = useNavigate();
   const [showButtons, setShowButtons] = useState(false);
+  const items = [
+    'Item 1',
+    <div key='jsx-item-1'>Custom JSX Content</div>,
+    'https://images.collegedunia.com/public/college_data/images/appImage/1599193361PuCampus.jpg?mode=stretch',
+    'Item 2',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'Item 4',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'Item 5',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'Item 7',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'Item 8',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'Item 10',
+    <div key='jsx-item-3'>Custom JSX Content</div>,
+    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'Item 11',
+    <div key='jsx-item-2'>Custom JSX Content</div>,
+    'Item 13',
+    <div key='jsx-item-4'>Custom JSX Content</div>,
+    'https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'Item 14',
+    // Add more items as needed
+  ];
+  
+
+  const ref = useRef(null);
+  const isInView = useInView(ref, { triggerOnce: true, margin: "-100px" });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,12 +68,11 @@ function Landing() {
     <div>
       <nav className="bg-black text-white p-4 fixed flex w-full z-10">
         <div className="container  flex justify-between items-center">
-          <div className="text-2xl font-bold flex justify-center hover:drop-shadow-[0_0_10px_#ffffff] items-center gap-2">
-        
+          <div className="text-2xl font-bold flex justify-center hover:drop-shadow-[0_0_10px_#ffffff] items-center gap-2">        
             <Binoculars className="" size={25} />
             GoGuide
           </div>
-          <div className="space-x-4  flex items-center ">
+          <div className="space-x-4  flex items-center">
             <Link
               to="intro"
               smooth={true}
@@ -113,19 +146,19 @@ function Landing() {
               borderColor="#fff"
               hoverFillColor="#222"
             /> */}
-             <Ballpit
-    count={200}
-    gravity={0.5}
-    friction={0.9}
-    wallBounce={0.95}
-    followCursor={false}
-    colors={["#3A29FF", "#FF94B4", "#FF3232"]}
-  /> 
-  {/* <Aurora
+            <Ballpit
+              count={200}
+              gravity={0.5}
+              friction={0.9}
+              wallBounce={0.95}
+              followCursor={false}
+              colors={["#3A29FF", "#FF94B4", "#FF3232"]}
+            />
+            {/* <Aurora
   colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
   speed={1.6}
 /> */}
- {/* <Particles
+            {/* <Particles
     particleColors={['#ffffff', '#ffffff']}
     particleCount={200}
     particleSpread={10}
@@ -135,44 +168,52 @@ function Landing() {
     alphaParticles={false}
     disableRotation={true}
   /> */}
-          </div> 
-          
+          </div>
 
-{/* <div className="" style={{ position: 'absolute',zIndex:0, overflow: 'hidden', minHeight: '500px', maxHeight: '500px', width: '100%'}}>
+          {/* <div className="" style={{ position: 'absolute',zIndex:0, overflow: 'hidden', minHeight: '500px', maxHeight: '500px', width: '100%'}}>
  
 </div> */}
-<div className="flex p-5 py-7 flex-col rounded-3xl justify-center items-center bg-[#00000057]">
-          <div className="flex  gap-4 hover:drop-shadow-[0_0_10px_#ffffff] justify-center items-center">
-            <Binoculars className="" size={65} />
-            <h1 className="text-5xl md:text-7xl font-bold text-white  mb-4">
-            
-              GoGuide
-            </h1>
-          </div>
-          <p className="text-xl md:text-2xl mb-8">
-            Your Ultimate Campus Companion.
-          </p>
 
-          <div className="flex space-x-4">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </button>
-            <button
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
-              onClick={() => navigate("/signup")}
-            >
-              Register
-            </button>
-          </div>
-          </div>
-          <div className="absolute bottom-4 w-full flex justify-center">
+          <FadeContent
+            blur={true}
+            duration={1000}
+            easing="ease-out"
+            initialOpacity={0}
+          >
+            {/* Anything placed inside this container will be fade into view */}
+            <div className="flex p-5 py-7 flex-col rounded-3xl justify-center items-center bg-[#00000057]">
+              <div className="flex  gap-4 hover:drop-shadow-[0_0_10px_#ffffff] justify-center items-center">
+                <Binoculars className="" size={65} />
+                <h1 className="text-5xl md:text-7xl font-bold text-white  mb-4">
+                  GoGuide
+                </h1>
+              </div>
+              <p className="text-xl md:text-2xl mb-8">
+                Your Ultimate Campus Companion.
+              </p>
+
+              <div className="flex space-x-4">
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                  onClick={() => navigate("/login")}
+                >
+                  Login
+                </button>
+                <button
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                  onClick={() => navigate("/signup")}
+                >
+                  Register
+                </button>
+              </div>
+            </div>
+          </FadeContent>
+
+          <div className="absolute overflow-hidden bottom-4 w-full flex justify-center">
             <ScrollVelocity
               texts={["Scroll Down"]}
               velocity={100}
-              className="custom-scroll-text"
+              className="custom-scroll-text text-black "
             />
           </div>
         </div>
@@ -180,16 +221,33 @@ function Landing() {
 
       <section
         id="intro"
-        className="min-h-screen p-8 bg-white text-black flex flex-col justify-center"
+        className="min-h-screen p-0 m-0 overflow-hidden bg-transparent text-black flex flex-col justify-center"
       >
-        <h2 className="text-4xl font-bold mb-4">Your Smart Campus Assistant</h2>
-        <p className="text-lg">
+        <div className="absolute m-0 p-0 bg-black w-full z-[-1]  h-screen"> <GridMotion items={items} /></div>
+       <div/>
+        <motion.h2
+          ref={ref}
+          initial={{ opacity: 0, x: -50 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-4xl font-bold mb-9 m-8 text-white"
+        >
+          Smart Campus Navigator
+        </motion.h2>
+
+        <motion.p
+          ref={ref}
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-lg m-8 text-white"
+        >
           Navigating campus life just got easier! GoGuide is your all-in-one
           smart assistant, designed to help students and faculty manage their
           daily tasks with ease. Whether you’re looking for your professor,
           tracking your assignments, or finding the best food spots on campus,
           GoGuide has got you covered!
-        </p>
+        </motion.p>
       </section>
 
       <section

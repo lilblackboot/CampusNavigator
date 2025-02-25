@@ -287,12 +287,12 @@ function Attendance() {
             </p>
             {calculationResult.type === 'positive' ? (
               <p className="text-green-700">
-                You can safely miss {calculationResult.classes} more {calculationResult.classes === 1 ? 'class' : 'classes'} 
-                while maintaining {targetAttendance}% attendance.
+                You can safely miss {calculationResult.classes} more {calculationResult.classes === 1 ? 'class ' : 'classes '} 
+                 while maintaining {targetAttendance}% attendance.
               </p>
             ) : (
               <p className="text-yellow-700">
-                You need to attend {calculationResult.classes} more {calculationResult.classes === 1 ? 'class' : 'classes'} 
+                You need to attend {calculationResult.classes} more {calculationResult.classes === 1 ? 'class ' : 'classes '}  
                 to reach {targetAttendance}% attendance.
               </p>
             )}

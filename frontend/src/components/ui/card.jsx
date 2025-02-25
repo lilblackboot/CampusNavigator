@@ -15,21 +15,7 @@ const Card = React.forwardRef(({ className, ...props }, ref) => (
 ));
 Card.displayName = "Card";
 
-const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
-  <h3
-    ref={ref}
-    className={`
-      text-2xl font-semibold leading-none tracking-tight
-      bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-300
-      bg-clip-text text-transparent
-      transition-all duration-300
-      group-hover:scale-105
-      animate-fadeIn
-      ${className}`}
-    {...props}
-  />
-));
-CardTitle.displayName = "CardTitle";
+
 
 const CardContent = React.forwardRef(({ className, ...props }, ref) => (
   <div 
@@ -92,16 +78,4 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Example usage component
-const ExampleCard = () => (
-  <Card className="w-full max-w-md mx-auto glass ">
-    <CardContent>
-      <p className="text-gray-600 dark:text-gray-300">
-        This is an example of the enhanced card component with animations,
-        glass morphism, and hover effects.
-      </p>
-    </CardContent>
-  </Card>
-);
-
-export { Card, CardTitle, CardContent, ExampleCard };
+export { Card, CardContent };

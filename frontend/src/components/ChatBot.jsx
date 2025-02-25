@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot, Image as ImageIcon, Loader2, X } from 'lucide-react';
-import { Card, CardTitle, CardContent } from "./ui/card";
+import { Card, CardContent } from "./ui/card";
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 import { generateResponse } from '../services/gemini';

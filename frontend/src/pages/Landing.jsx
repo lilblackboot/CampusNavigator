@@ -16,6 +16,7 @@ import GetStarted from "../components/GetStarted";
 import Intro from "../components/Intro";
 import Makers from "../components/Makers";
 import AboutUs from "../components/AboutUs.jsx";
+import * as m from "motion/react-client"
 function Landing() {
   const navigate = useNavigate();
   const [showButtons, setShowButtons] = useState(false);
@@ -65,7 +66,7 @@ function Landing() {
 
   return (
     <div>
-      <nav className="bg-black text-white p-4 fixed flex w-full z-10">
+      <nav className="bg-black text-white p-4 fixed flex w-full z-10 ">
         <div className="container  flex justify-between items-center">
           <div className="text-2xl font-bold flex justify-center hover:drop-shadow-[0_0_10px_#ffffff] items-center gap-2">
             <Binoculars className="" size={25} />
@@ -192,23 +193,27 @@ function Landing() {
               </p>
 
               <div className="flex space-x-4">
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                <m.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                  className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full transition duration-300"
                   onClick={() => navigate("/login")}
                 >
                   Login
-                </button>
-                <button
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                </m.button>
+                <m.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                  className="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full transition duration-300"
                   onClick={() => navigate("/signup")}
                 >
                   Register
-                </button>
+                </m.button>
               </div>
             </div>
           </FadeContent>
 
-          <div className="absolute overflow-hidden bottom-4 w-full flex justify-center">
+          <div className="absolute bg-[#ffffff48] overflow-hidden bottom-0 w-full flex justify-center mb-0 pb-0">
             <ScrollVelocity
               texts={["Scroll Down"]}
               velocity={100}

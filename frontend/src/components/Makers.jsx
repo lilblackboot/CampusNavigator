@@ -1,19 +1,32 @@
 import React from 'react'
 import TiltedCard from './ui/TiltedCard'
+import { motion,useInView } from 'framer-motion'
+import { useRef } from 'react'
 
 function Makers() {
+  const ref = useRef(null);
+      const isInView = useInView(ref, { triggerOnce: true, margin: "-100px" });
   return (
     <section
         id="makers"
-        className="min-h-screen  p-8 bg-black text-white flex flex-col justify-center"
+        className="min-h-screen  p-8 bg-black text-white flex flex-col items-center justify-center"
       >
-        <h2 className="text-4xl font-bold mb-4">Meet the Makers</h2>
-        <p className="text-lg mb-8">
+
+<motion.h2
+          ref={ref}
+          initial={{ opacity: 0, y: -50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-4xl font-bold mb-6 m-8 "
+        >
+          Meet the Makers
+        </motion.h2>
+
+        <p className="text-lg text-center mb-8">
           GoGuide is brought to you by a passionate team of tech enthusiasts
-          from Parul Institute of Technology, Parul University. Our team
-          members:
+          from Parul Institute of Technology, Parul University.
         </p>
-        <div className="flex gap-7 gap-y-10 flex-wrap justify-around">
+        <div className="flex gap-7 gap-y-10 flex-wrap justify-center">
           <TiltedCard
             imageSrc="./yash.jpg"
             altText="Yash"

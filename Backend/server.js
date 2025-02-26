@@ -5,6 +5,9 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 dotenv.config();
 const app = express();
@@ -15,7 +18,15 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json());
+
+// Serve uploaded files statically
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+app.use('/uploads', express.static(uploadsDir));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
@@ -27,7 +38,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   console.error('MongoDB connection error:', error);
 });
 
-// Schemas remain the same...
+// User Schema
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -48,6 +59,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
+// OTP Schema
 const otpSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -66,6 +78,81 @@ const otpSchema = new mongoose.Schema({
 
 const OTP = mongoose.model('OTP', otpSchema);
 
+// Food Post Schema
+const foodPostSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  userEmail: {
+    type: String,
+    required: true
+  },
+  region: {
+    type: String,
+    required: true
+  },
+  shop: {
+    type: String,
+    required: true
+  },
+  food: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  imageUrl: {
+    type: String,
+    required: true
+  },
+  location: {
+    lat: Number,
+    lng: Number
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const FoodPost = mongoose.model('FoodPost', foodPostSchema);
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    const uploadPath = path.join(__dirname, 'uploads/food-images');
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true });
+    }
+    cb(null, uploadPath);
+  },
+  filename: function(req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const ext = path.extname(file.originalname);
+    cb(null, 'food-' + uniqueSuffix + ext);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) {
+    cb(null, true);
+  } else {
+    cb(new Error('Only image files are allowed!'), false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB limit
+  },
+  fileFilter: fileFilter
+});
+
 // Nodemailer configuration
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -75,6 +162,27 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+// Middleware to verify user authentication
+const authenticateUser = async (req, res, next) => {
+  const { userId } = req.body;
+  
+  if (!userId) {
+    return res.status(401).json({ message: 'Authentication required' });
+  }
+  
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(401).json({ message: 'User not found' });
+    }
+    
+    req.user = user;
+    next();
+  } catch (error) {
+    console.error('Authentication error:', error);
+    res.status(500).json({ message: 'Server error during authentication' });
+  }
+};
 // Function to send welcome email
 const sendWelcomeEmail = async (email) => {
   const mailOptions = {
@@ -316,6 +424,105 @@ app.post('/api/slots', async (req, res) => {
   } catch (error) {
     console.error('Error saving slots:', error);
     res.status(500).json({ message: error.message });
+  }
+});
+app.get('/api/food-posts', async (req, res) => {
+  try {
+    const posts = await FoodPost.find().sort({ createdAt: -1 });
+    res.json(posts);
+  } catch (error) {
+    console.error('Error fetching food posts:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Create a new food post with image upload
+app.post('/api/food-posts', upload.single('image'), async (req, res) => {
+  try {
+    const { userId, region, shop, food, description, lat, lng } = req.body;
+    
+    if (!userId) {
+      return res.status(400).json({ message: 'User ID is required' });
+    }
+    
+    // Validate user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    if (!req.file) {
+      return res.status(400).json({ message: 'Image file is required' });
+    }
+    
+    // Create relative URL for the uploaded image
+    const imageUrl = `/uploads/food-images/${req.file.filename}`;
+    
+    // Create new food post
+    const newFoodPost = new FoodPost({
+      userId,
+      userEmail: user.email,
+      region,
+      shop,
+      food,
+      description,
+      imageUrl,
+      location: {
+        lat: lat || null,
+        lng: lng || null
+      }
+    });
+    
+    const savedPost = await newFoodPost.save();
+    res.status(201).json(savedPost);
+  } catch (error) {
+    console.error('Error creating food post:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Get a specific food post
+app.get('/api/food-posts/:id', async (req, res) => {
+  try {
+    const post = await FoodPost.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: 'Food post not found' });
+    }
+    res.json(post);
+  } catch (error) {
+    console.error('Error fetching food post:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Delete a food post
+app.delete('/api/food-posts/:id', async (req, res) => {
+  try {
+    const { userId } = req.body;
+    
+    const post = await FoodPost.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: 'Food post not found' });
+    }
+    
+    // Check if user owns this post
+    if (post.userId.toString() !== userId) {
+      return res.status(403).json({ message: 'Unauthorized: You can only delete your own posts' });
+    }
+    
+    // Delete the image file
+    if (post.imageUrl) {
+      const imagePath = path.join(__dirname, post.imageUrl);
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
+      }
+    }
+    
+    await FoodPost.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Food post deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting food post:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 const PORT = process.env.PORT || 5000;

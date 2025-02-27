@@ -5,7 +5,7 @@ import TabsBar from '../components/TabsBar'
 function Home() {
   return (
     <>
-    <div className='min-h-screen'>
+    <div className='h-screen'>
     <Nav/>
     <TabsBar/>
     </div>

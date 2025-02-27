@@ -69,10 +69,10 @@ function Landing() {
       <nav className="bg-black text-white p-4 fixed flex w-full z-10 ">
         <div className="container  flex justify-between items-center">
           <div className="text-2xl font-bold flex justify-center hover:drop-shadow-[0_0_10px_#ffffff] items-center gap-2">
-            <Binoculars className="" size={25} />
-            GoGuide
+            <Binoculars className="font-bold" size={35} />
+            {/* GoGuide */}
           </div>
-          <div className="space-x-4  flex items-center">
+          <div className="space-x-4  flex justify-between items-center">
             <Link
               to="intro"
               smooth={true}
@@ -181,7 +181,7 @@ function Landing() {
             initialOpacity={0}
           >
             {/* Anything placed inside this container will be fade into view */}
-            <div className="flex p-5 py-7 flex-col rounded-3xl justify-center items-center bg-[#00000057]">
+            <div className="flex p-5 py-7 flex-col rounded-3xl justify-cent items-center bg-[#00000057]">
               <div className="flex  gap-4 hover:drop-shadow-[0_0_10px_#ffffff] justify-center items-center">
                 <Binoculars className="" size={65} />
                 <h1 className="text-5xl md:text-7xl font-bold text-white  mb-4">

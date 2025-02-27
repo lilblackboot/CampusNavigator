@@ -5,6 +5,8 @@ import FindMyTeacher from "./FindMyTeacher";
 import FindMyFood from "./FindMyFood";
 import StarTeachers from "./StarTeachers";
 import GeneralNavigator from "./GeneralNavigator";
+import {motion} from "framer-motion";
+
 import {
   BookOpenText,
   UserRoundSearch,
@@ -16,7 +18,7 @@ import {
 import { useState } from "react";
 
 function TabsBar() {
-  const [activeTab, setActiveTab] = useState("tab1");
+  const [activeTab, setActiveTab] = useState(null);
 
   const tabs = [
     { id: "tab1", label: "Attendence" },
@@ -48,7 +50,22 @@ function TabsBar() {
   return (
     <div className="bg-black min-h-screen">
       <div className="bg-black flex justify-center text-white">
-        {tabs.map((tab) => (
+        {activeTab===null?<div>
+
+<header className="">
+  <h1 className="font-bold text-7xl">Welcome back! user</h1>
+</header>
+<main>
+  <div id="attendance/chatbot"></div>
+  <div id='star teachers'></div>
+  <div id="find my food"></div>
+  <div id="events"></div>
+</main>
+
+        </div>
+        :
+        
+        tabs.map((tab) => (
           <button
           type="button"
             key={tab.id}
@@ -57,12 +74,15 @@ function TabsBar() {
               activeTab === tab.id ? "bg-white text-black" : ""
             }`}
           >
-            <div>{tabIcons[tab.id]} </div>
+            <motion.div 
+            whileHover={{ scale: 1.5, duration: 0.5 }}
+            whileTap={{ scale: 0.9 }}
+            >{tabIcons[tab.id]} </motion.div>
             <div className={`${activeTab === tab.id? "visible" : "hidden"}`}>{tab.label}</div>
           </button>
         ))}
       </div>
-      <div className="bg-white mx-4  rounded-lg">{tabContent[activeTab]}</div>
+      <div className="bg-white mx-4  rounded-lg">{activeTab===null ?tabContent[activeTab]:tabContent[activeTab]}</div>
     </div>
   );
 }

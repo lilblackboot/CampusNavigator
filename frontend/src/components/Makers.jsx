@@ -22,10 +22,15 @@ function Makers() {
           Meet the Makers
         </motion.h2>
 
-        <p className="text-lg text-center mb-8">
+        <motion.p 
+        ref={ref}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="text-lg text-center mb-8">
           GoGuide is brought to you by a passionate team of tech enthusiasts
           from Parul Institute of Technology, Parul University.
-        </p>
+        </motion.p>
         <div className="flex gap-7 gap-y-10 flex-wrap justify-center">
           <TiltedCard
             imageSrc="./yash.jpg"

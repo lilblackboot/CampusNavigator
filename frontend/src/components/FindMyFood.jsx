@@ -185,15 +185,16 @@ function FindMyFood() {
   };
 
   const getGoogleMapsEmbedUrl = (post) => {
+    // Access API keys from Vite environment variables
+    const coordinatesApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY_COORDINATES;
+    const searchApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY_SEARCH;
+    
     if (post.latitude && post.longitude) {
       // Use proper coordinates format for Google Maps embed URL
-      return `https://www.google.com/maps/embed/v1/place?key=AIzaSyD8C5meGXaM7ubZHSRfGqi8Mm_Aq52jisg&q=${post.latitude},${post.longitude}&zoom=17`;
-      
-      // Alternative without API key (less reliable but works for testing):
-      // return `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d500!4d${post.longitude}!3d${post.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM${post.latitude}_${post.longitude}!5e0!3m2!1sen!2sin!4v1739620877588!5m2!1sen!2sin`;
+      return `https://www.google.com/maps/embed/v1/place?key=${coordinatesApiKey}&q=${post.latitude},${post.longitude}&zoom=17`;
     } else {
       // Default map or search by shop name and region
-      return `https://www.google.com/maps/embed/v1/search?key=AIzaSyCiN08OWMOXuzooeo5pLTcTmquuNpENQCk&q=${encodeURIComponent(post.shop)}+${encodeURIComponent(post.region)}+Parul+University`;
+      return `https://www.google.com/maps/embed/v1/search?key=${searchApiKey}&q=${encodeURIComponent(post.shop)}+${encodeURIComponent(post.region)}+Parul+University`;
     }
   };
 

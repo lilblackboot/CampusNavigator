@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../context/UserContext';
@@ -9,7 +8,7 @@ function Attendance() {
   const [classesAttended, setClassesAttended] = useState(34);
   const [totalClasses, setTotalClasses] = useState(40);
   
-  // New state variables for attendance calculator
+  // State variables for attendance calculator
   const [totalSlots, setTotalSlots] = useState(0);
   const [attendedSlots, setAttendedSlots] = useState(0);
   const [targetAttendance, setTargetAttendance] = useState(75);
@@ -28,6 +27,13 @@ function Attendance() {
   });
   const [editMode, setEditMode] = useState(false);
   const [error, setError] = useState(null);
+
+  // Get current day of the week
+  const getCurrentDay = () => {
+    const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const dayIndex = new Date().getDay();
+    return days[dayIndex];
+  };
 
   // Calculate attendance and required/possible bunks
   const calculateAttendance = () => {
@@ -48,13 +54,129 @@ function Attendance() {
         classes: possibleBunks
       });
     } else {
-      // Calculate how many classes need to be attended to reach target attendance
-      // Formula: ((target * total)/100 - attended) = classes needed to attend
-      const requiredClasses = Math.ceil((targetAttendance * totalSlots) / 100 - attendedSlots);
+      // Calculate how many additional classes are needed
+      // Using the weekly schedule pattern from slots
+      
+      // Calculate total weekly slots
+      const weeklySlots = Object.values(slots).reduce((sum, count) => sum + count, 0);
+      
+      if (weeklySlots === 0) {
+        setError("You need to configure your weekly schedule first");
+        return;
+      }
+      
+      // Calculate how many more classes needed to reach target attendance
+      // Formula: Find x where: (attended + x) / (total + x) = target/100
+      // Solving for x: x = (target*total - 100*attended) / (100 - target)
+      const classesNeeded = Math.ceil((targetAttendance * totalSlots - 100 * attendedSlots) / (100 - targetAttendance));
+      
+      // Get the current day of the week
+      const currentDay = getCurrentDay();
+      
+      // Create an array of days in order starting from tomorrow
+      const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+      const currentDayIndex = days.indexOf(currentDay);
+      
+      // Reorder days to start from tomorrow
+      const orderedDays = [
+        ...days.slice(currentDayIndex + 1),
+        ...days.slice(0, currentDayIndex + 1)
+      ];
+      
+      // Create detailed breakdown of classes to add per day
+      const slotBreakdown = {};
+      days.forEach(day => {
+        slotBreakdown[day] = 0;
+      });
+      
+      // Track available capacity for each day (using the actual scheduled slots as max capacity)
+      const availableCapacity = {};
+      Object.entries(slots).forEach(([day, count]) => {
+        // Each day's capacity is based on user's actual schedule
+        availableCapacity[day] = count > 0 ? count : 0;
+      });
+      
+      // Calculate total available capacity across all days
+      const totalAvailableCapacity = Object.values(availableCapacity).reduce((sum, count) => sum + count, 0);
+      
+      // Check if we have enough capacity for all needed classes
+      const weeksNeeded = Math.ceil(classesNeeded / totalAvailableCapacity);
+      let remainingToAllocate = classesNeeded;
+      let extraWeeksNeeded = 0;
+      
+      // Allocate classes starting from tomorrow and going forward
+      for (let week = 0; week < weeksNeeded; week++) {
+        // Get days with available capacity and start from tomorrow
+        const sortedDays = orderedDays
+          .filter(day => availableCapacity[day] > 0)
+          .map(day => [day, slots[day]]);
+        
+        if (sortedDays.length === 0) {
+          // No days have available capacity
+          extraWeeksNeeded = Math.ceil(remainingToAllocate / totalAvailableCapacity);
+          break;
+        }
+        
+        // First pass: distribute classes proportionally to original schedule
+        if (week === 0) {
+          sortedDays.forEach(([day, count]) => {
+            if (remainingToAllocate > 0 && availableCapacity[day] > 0) {
+              // Calculate proportion based on original schedule
+              const proportion = count / weeklySlots;
+              const allocate = Math.min(
+                Math.ceil(totalAvailableCapacity * proportion), // Proportional allocation
+                availableCapacity[day], // Respecting max per day
+                remainingToAllocate // Don't allocate more than needed
+              );
+              
+              slotBreakdown[day] += allocate;
+              remainingToAllocate -= allocate;
+            }
+          });
+        }
+        
+        // Second pass: distribute remaining classes for this week
+        // Use round-robin through the ordered days (starting from tomorrow)
+        let index = 0;
+        while (remainingToAllocate > 0 && index < sortedDays.length) {
+          const [day, _] = sortedDays[index];
+          
+          if (availableCapacity[day] > 0 && slotBreakdown[day] < availableCapacity[day]) {
+            slotBreakdown[day] += 1;
+            remainingToAllocate -= 1;
+          }
+          
+          // Move to next day
+          index = (index + 1) % sortedDays.length;
+          
+          // If we've gone through all days once, break to move to next week
+          if (index === 0 && remainingToAllocate > 0) {
+            break;
+          }
+        }
+      }
+      
+      // Calculate the new totals after adding these classes
+      const newTotal = totalSlots + classesNeeded;
+      const newAttendance = ((attendedSlots + classesNeeded) / newTotal * 100).toFixed(2);
+      
+      // Calculate how many weeks this represents
+      const totalAddedClasses = Object.values(slotBreakdown).reduce((sum, count) => sum + count, 0);
+      const fullWeeks = Math.floor(totalAddedClasses / totalAvailableCapacity);
+      const remainingClasses = totalAddedClasses % totalAvailableCapacity;
+      
       setCalculationResult({
         type: 'negative',
         percentage: currentPercentage.toFixed(2),
-        classes: requiredClasses
+        classesNeeded: classesNeeded,
+        totalAddedClasses: totalAddedClasses,
+        fullWeeks: fullWeeks,
+        remainingClasses: remainingClasses,
+        newTotal: newTotal,
+        newPercentage: newAttendance,
+        slotBreakdown: slotBreakdown,
+        extraWeeksNeeded: extraWeeksNeeded,
+        currentDay: currentDay
       });
     }
   };
@@ -109,9 +231,12 @@ function Attendance() {
   };
 
   const handleSlotChange = (day, value) => {
+    const numValue = parseInt(value) || 0;
+    // No fixed max per day - user can set their own schedule
+    
     setSlots(prevSlots => ({
       ...prevSlots,
-      [day]: parseInt(value) || 0
+      [day]: numValue
     }));
   };
 
@@ -156,8 +281,6 @@ function Attendance() {
     }
   };
 
-  // Rest of the component remains the same...
-  // (Previous component code continues with UI rendering)
   const totalWeeklySlots = Object.values(slots).reduce((sum, value) => sum + value, 0);
 
   const SlotConfiguration = () => (
@@ -181,7 +304,6 @@ function Attendance() {
               <input
                 type="number"
                 min="0"
-                max="12"
                 value={slots[day]}
                 onChange={(e) => handleSlotChange(day, e.target.value)}
                 className="ml-2 p-2 border rounded w-20 text-center"
@@ -218,14 +340,6 @@ function Attendance() {
     </div>
   );
 
-  if (loading) {
-    return (
-      <div className="min-h-screen p-8 bg-gray-100 flex flex-col items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-        <p className="mt-4 text-xl">Loading your attendance data...</p>
-      </div>
-    );
-  }
   const AttendanceCalculator = () => (
     <div className="bg-white rounded-lg shadow-md p-6 w-full max-w-2xl my-8">
       <h3 className="text-2xl font-semibold mb-4">Attendance Calculator</h3>
@@ -291,10 +405,47 @@ function Attendance() {
                  while maintaining {targetAttendance}% attendance.
               </p>
             ) : (
-              <p className="text-yellow-700">
-                You need to attend {calculationResult.classes} more {calculationResult.classes === 1 ? 'class ' : 'classes '}  
-                to reach {targetAttendance}% attendance.
-              </p>
+              <>
+                <p className="text-yellow-700 mb-2">
+                  You need to attend {calculationResult.classesNeeded} more {calculationResult.classesNeeded === 1 ? 'class' : 'classes'} 
+                  to reach {targetAttendance}% attendance.
+                </p>
+                {(calculationResult.fullWeeks > 0 || calculationResult.remainingClasses > 0) && (
+                  <p className="text-gray-700 mb-1">
+                    Based on your schedule, this represents {calculationResult.fullWeeks} full {calculationResult.fullWeeks === 1 ? 'week' : 'weeks'} 
+                    {calculationResult.remainingClasses > 0 ? ` plus ${calculationResult.remainingClasses} additional ${calculationResult.remainingClasses === 1 ? 'class' : 'classes'}` : ''}.
+                  </p>
+                )}
+                <p className="text-gray-700 mb-2">
+                  This would increase your total slots from {totalSlots} to {calculationResult.newTotal}, 
+                  resulting in an attendance of {calculationResult.newPercentage}%.
+                </p>
+                <div className="mt-3 pt-3 border-t border-yellow-200">
+                  <p className="text-sm font-medium mb-2">
+                    Additional classes needed per day (starting from {calculationResult.currentDay === getCurrentDay() ? 'tomorrow' : 'the day after today'}):
+                  </p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {/* Reorder the days to start from tomorrow */}
+                    {(() => {
+                      const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+                      const currentDayIndex = days.indexOf(calculationResult.currentDay);
+                      const orderedDays = [
+                        ...days.slice(currentDayIndex + 1),
+                        ...days.slice(0, currentDayIndex + 1)
+                      ];
+                      
+                      return orderedDays.map(day => (
+                        calculationResult.slotBreakdown[day] > 0 && (
+                          <div key={day} className="flex justify-between">
+                            <span className="capitalize">{day}:</span>
+                            <span>{calculationResult.slotBreakdown[day]} {calculationResult.slotBreakdown[day] === 1 ? 'class' : 'classes'}</span>
+                          </div>
+                        )
+                      ));
+                    })()}
+                  </div>
+                </div>
+              </>
             )}
           </div>
         )}
@@ -310,10 +461,11 @@ function Attendance() {
       </div>
     );
   }
+  
   return (
     <div className="min-h-screen p-8 bg-gray-100 text-black flex flex-col items-center">
       <h2 className="text-4xl font-bold mb-8">Attendance Manager</h2>
-            <AttendanceCalculator />
+      <AttendanceCalculator />
       {showSlotForm ? (
         <SlotConfiguration />
       ) : (

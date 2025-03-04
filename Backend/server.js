@@ -109,9 +109,13 @@ const foodPostSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  location: {
-    lat: Number,
-    lng: Number
+  latitude: {
+    type: Number,
+    required: false
+  },
+  longitude: {
+    type: Number,
+    required: false
   },
   createdAt: {
     type: Date,
@@ -439,7 +443,7 @@ app.get('/api/food-posts', async (req, res) => {
 // Create a new food post with image upload
 app.post('/api/food-posts', upload.single('image'), async (req, res) => {
   try {
-    const { userId, region, shop, food, description, lat, lng } = req.body;
+    const { userId, region, shop, food, description, latitude, longitude} = req.body;
     
     if (!userId) {
       return res.status(400).json({ message: 'User ID is required' });
@@ -467,10 +471,8 @@ app.post('/api/food-posts', upload.single('image'), async (req, res) => {
       food,
       description,
       imageUrl,
-      location: {
-        lat: lat || null,
-        lng: lng || null
-      }
+      latitude: latitude || null,
+      longitude: longitude || null
     });
     
     const savedPost = await newFoodPost.save();

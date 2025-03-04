@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 import axios from 'axios';
 import { useUser } from '../context/UserContext';
 
@@ -14,6 +14,8 @@ function FindMyFood() {
     shop: '',
     food: '',
     description: '',
+    latitude: null,
+    longitude: null,
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -22,6 +24,8 @@ function FindMyFood() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPost, setSelectedPost] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [locationStatus, setLocationStatus] = useState('');
+  const [isGettingLocation, setIsGettingLocation] = useState(false);
 
   // Fetch all food posts on component mount
   useEffect(() => {
@@ -57,6 +61,47 @@ function FindMyFood() {
     }
   };
 
+  const getCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      setLocationStatus('Geolocation is not supported by your browser');
+      return;
+    }
+
+    setIsGettingLocation(true);
+    setLocationStatus('Getting your location...');
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setNewPost({
+          ...newPost,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+        setLocationStatus('✓ Location captured successfully');
+        setIsGettingLocation(false);
+      },
+      (error) => {
+        console.error('Error getting location:', error);
+        setLocationStatus(`Failed to get location: ${getLocationErrorMessage(error)}`);
+        setIsGettingLocation(false);
+      },
+      { enableHighAccuracy: true }
+    );
+  };
+
+  const getLocationErrorMessage = (error) => {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        return "Location permission denied. Please enable location services.";
+      case error.POSITION_UNAVAILABLE:
+        return "Location information is unavailable.";
+      case error.TIMEOUT:
+        return "Request to get location timed out.";
+      default:
+        return "An unknown error occurred.";
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -68,6 +113,13 @@ function FindMyFood() {
     if (!imageFile) {
       alert('Please select an image for your food post');
       return;
+    }
+
+    if (!newPost.latitude || !newPost.longitude) {
+      const proceedWithoutLocation = window.confirm('No location data captured. Do you want to proceed without location?');
+      if (!proceedWithoutLocation) {
+        return;
+      }
     }
 
     try {
@@ -82,6 +134,12 @@ function FindMyFood() {
       formData.append('food', newPost.food);
       formData.append('description', newPost.description);
       
+      // Add location data if available
+      if (newPost.latitude && newPost.longitude) {
+        formData.append('latitude', newPost.latitude);
+        formData.append('longitude', newPost.longitude);
+      }
+      
       const response = await axios.post('http://localhost:5000/api/food-posts', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -92,10 +150,18 @@ function FindMyFood() {
       setPosts([response.data, ...posts]);
       
       // Reset form
-      setNewPost({ region: '', shop: '', food: '', description: '' });
+      setNewPost({ 
+        region: '', 
+        shop: '', 
+        food: '', 
+        description: '', 
+        latitude: null, 
+        longitude: null 
+      });
       setImageFile(null);
       setPreviewImage(null);
       setShowForm(false);
+      setLocationStatus('');
       
       alert('Food post created successfully!');
     } catch (err) {
@@ -116,6 +182,20 @@ function FindMyFood() {
 
   const closeModal = () => {
     setSelectedPost(null);
+  };
+
+  const getGoogleMapsEmbedUrl = (post) => {
+    // Access API keys from Vite environment variables
+    const coordinatesApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY_COORDINATES;
+    const searchApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY_SEARCH;
+    
+    if (post.latitude && post.longitude) {
+      // Use proper coordinates format for Google Maps embed URL
+      return `https://www.google.com/maps/embed/v1/place?key=${coordinatesApiKey}&q=${post.latitude},${post.longitude}&zoom=17`;
+    } else {
+      // Default map or search by shop name and region
+      return `https://www.google.com/maps/embed/v1/search?key=${searchApiKey}&q=${encodeURIComponent(post.shop)}+${encodeURIComponent(post.region)}+Parul+University`;
+    }
   };
 
   return (
@@ -213,6 +293,34 @@ function FindMyFood() {
                 )}
               </div>
               
+              {/* Location Capture */}
+              <div>
+                <label className="block text-gray-700 mb-1">Location</label>
+                <div className="flex items-center space-x-2">
+                  <button
+                    type="button"
+                    onClick={getCurrentLocation}
+                    disabled={isGettingLocation}
+                    className={`flex items-center gap-2 py-2 px-4 rounded-lg text-white ${
+                      isGettingLocation ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'
+                    } transition duration-300`}
+                  >
+                    <FaMapMarkerAlt />
+                    {isGettingLocation ? 'Getting Location...' : 'Capture Current Location'}
+                  </button>
+                  {newPost.latitude && newPost.longitude && (
+                    <span className="text-sm text-green-600">
+                      {newPost.latitude.toFixed(4)}, {newPost.longitude.toFixed(4)}
+                    </span>
+                  )}
+                </div>
+                {locationStatus && (
+                  <p className={`text-sm mt-1 ${locationStatus.includes('Failed') || locationStatus.includes('not supported') ? 'text-red-500' : locationStatus.includes('Getting') ? 'text-blue-500' : 'text-green-500'}`}>
+                    {locationStatus}
+                  </p>
+                )}
+              </div>
+              
               <div>
                 <label className="block text-gray-700 mb-1">Description</label>
                 <textarea
@@ -283,6 +391,11 @@ function FindMyFood() {
                     <span className="font-medium">Region:</span> {post.region}
                   </p>
                   <p className="text-gray-600 mt-2 line-clamp-3">{post.description}</p>
+                  {post.latitude && post.longitude && (
+                    <p className="text-green-600 text-xs mt-1">
+                      <FaMapMarkerAlt className="inline mr-1" /> Location available
+                    </p>
+                  )}
                   <p className="text-xs text-gray-500 mt-3">
                     Posted by: {post.userEmail.split('@')[0]}
                   </p>
@@ -319,7 +432,7 @@ function FindMyFood() {
               
               <div className="h-64 w-full mb-4">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.6960402601094!2d73.36242097618985!3d22.28950114328503!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fdb01ce1797f9%3A0xaa8b442e4fc91e5f!2sSubway%20Parul%20University!5e0!3m2!1sen!2sin!4v1739620877588!5m2!1sen!2sin" 
+                  src={getGoogleMapsEmbedUrl(selectedPost)}
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 
@@ -337,6 +450,12 @@ function FindMyFood() {
                   <p className="text-gray-600">
                     <span className="font-medium">Region:</span> {selectedPost.region}
                   </p>
+                  {selectedPost.latitude && selectedPost.longitude && (
+                    <p className="text-green-600 text-sm">
+                      <FaMapMarkerAlt className="inline mr-1" />
+                      Location: {selectedPost.latitude.toFixed(4)}, {selectedPost.longitude.toFixed(4)}
+                    </p>
+                  )}
                   <p className="text-gray-500 text-sm mt-2">
                     Posted by: {selectedPost.userEmail.split('@')[0]}
                   </p>

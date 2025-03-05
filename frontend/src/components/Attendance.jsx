@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "../context/UserContext";
 import ChatBot from "./ChatBot";
+import * as m from 'motion/react-client'
 
 function Attendance() {
   const { user } = useUser();
@@ -555,18 +556,62 @@ function Attendance() {
     <>
       <div className="bg-white grid gap-4 grid-cols-3  grid-row-5 rounded-3xl ">
         <div className=" grid grid-cols-3 min-h-3 gap-4 rounded-2xl m-3 col-span-2 p-3">
-          <div className="bg-[#48c886] text-white font-semibold py-20 rounded-3xl text-center">Current Attendance</div>
-          <div className="bg-[#7034ff] text-white font-semibold py-20 rounded-3xl text-center">total slots</div>
-          <div className="bg-[#ff822c] text-white font-semibold py-20 rounded-3xl text-center">attended</div>
+          <m.div  
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+                duration: 0.4,
+                scale: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
+            }} 
+            className="bg-[#48c886] text-white font-semibold py-20 rounded-3xl text-center">Current Attendance</m.div>
+          <m.div 
+           initial={{ opacity: 0, scale: 0 }}
+           animate={{ opacity: 1, scale: 1 }}
+           transition={{
+            delay: 0.2,
+               duration: 0.4,
+               scale: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
+           }} 
+          className="bg-[#7034ff] text-white font-semibold py-20 rounded-3xl text-center">total slots</m.div>
+          <m.div 
+           initial={{ opacity: 0, scale: 0 }}
+           animate={{ opacity: 1, scale: 1 }}
+           transition={{
+            delay: 0.4,
+               duration: 0.4,
+               scale: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
+           }} 
+          className="bg-[#ff822c] text-white font-semibold py-20 rounded-3xl text-center">attended</m.div>
         </div>
-        <div className="bg-[#d7d7e3]  mt-6 rounded-2xl row-span-5 m-3 h-content flex flex-col items-center p-3">
+        <m.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+              duration: 0.8,
+              
+              ease: [0, 0.71, 0.2, 1.01],}}
+        className="bg-[#d7d7e3]  mt-6 rounded-2xl row-span-5 m-3 h-content flex flex-col items-center p-3">
           <h1 className="font-bold">Assistant Bot</h1>
           <ChatBot />
-        </div>
-        <div className="bg-[#d7d7e3] min-h-3 rounded-2xl m-3 row-span-4 p-3 ">
+        </m.div>
+        <m.div
+         initial={{ opacity: 0, scale: 0.5 }}
+         animate={{ opacity: 1, scale: 1 }}
+         transition={{
+             duration: 0.8,
+             
+             ease: [0, 0.71, 0.2, 1.01],}}
+        className="bg-[#d7d7e3] min-h-3 rounded-2xl m-3 row-span-4 p-3 ">
           <AttendanceCalculator />
-        </div>
-        <div className="bg-[#d7d7e3] min-h-3 rounded-2xl m-3 row-span-4 p-3">
+        </m.div>
+        <m.div
+         initial={{ opacity: 0, scale: 0.5 }}
+         animate={{ opacity: 1, scale: 1 }}
+         transition={{
+             duration: 0.8,
+             
+             ease: [0, 0.71, 0.2, 1.01],}}
+        className="bg-[#d7d7e3] min-h-3 rounded-2xl m-3 row-span-4 p-3">
           <div className=" w-full max-w-4xl">
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="flex justify-between items-center mb-4">
@@ -600,7 +645,7 @@ function Attendance() {
               </div>}
             </div>
           </div>
-        </div>
+        </m.div>
       </div>
     </>
 

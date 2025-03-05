@@ -587,7 +587,7 @@ function Attendance() {
           direction="up"
           duration={1}
           className="count-up-text font-semibold text-5xl"
-        /></div> total slots</m.div>
+        /></div> Total Slots</m.div>
           <m.div 
            initial={{ opacity: 0, scale: 0 }}
            animate={{ opacity: 1, scale: 1 }}
@@ -603,7 +603,7 @@ function Attendance() {
           direction="up"
           duration={1}
           className="count-up-text font-semibold text-5xl"
-        /></div>attended</m.div>
+        /></div>Attended Slots</m.div>
         </div>
         <m.div
           initial={{ opacity: 0, scale: 0.5 }}

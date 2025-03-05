@@ -560,11 +560,12 @@ function Attendance() {
           <m.div  
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
+            whileTap={{ scale: 0.8 }}
             transition={{
                 duration: 0.4,
                 scale: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
             }} 
-            className="bg-[#48c886] text-white font-semibold py-20 rounded-3xl text-center"> <div className="font-semibold text-5xl"><CountUp
+            className="bg-[#48c886] text-white shadow-gray-600 shadow-md font-semibold py-20 rounded-3xl text-center"> <div className="font-semibold text-5xl"><CountUp
             from={0}
             to={currentAttendance}
             separator=","
@@ -575,12 +576,13 @@ function Attendance() {
           <m.div 
            initial={{ opacity: 0, scale: 0 }}
            animate={{ opacity: 1, scale: 1 }}
+           whileTap={{ scale: 0.8 }}
            transition={{
             delay: 0.2,
                duration: 0.4,
                scale: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
            }} 
-          className="bg-[#7034ff] text-white font-semibold py-20 rounded-3xl text-center"> <div><CountUp
+          className="bg-[#7034ff] text-white shadow-gray-600 shadow-md font-semibold py-20 rounded-3xl text-center"> <div><CountUp
           from={0}
           to={totalClasses}
           separator=","
@@ -591,12 +593,13 @@ function Attendance() {
           <m.div 
            initial={{ opacity: 0, scale: 0 }}
            animate={{ opacity: 1, scale: 1 }}
+           whileTap={{ scale: 0.8 }}
            transition={{
             delay: 0.4,
                duration: 0.4,
                scale: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
            }} 
-          className="bg-[#ff822c] text-white font-semibold py-20 rounded-3xl text-center"> <div><CountUp
+          className="bg-[#ff822c] shadow-gray-600 shadow-md text-white font-semibold py-20 rounded-3xl text-center"> <div><CountUp
           from={0}
           to={attendedSlots}
           separator=","
@@ -612,7 +615,7 @@ function Attendance() {
               duration: 0.8,
               
               ease: [0, 0.71, 0.2, 1.01],}}
-        className="bg-[#d7d7e3]  mt-6 rounded-2xl row-span-5 m-3 h-content flex flex-col items-center p-3">
+        className="bg-[#d7d7e3]   shadow-gray-600 shadow-md mt-6 rounded-2xl row-span-5 m-3 h-content flex flex-col items-center p-3">
           <h1 className="font-bold">Assistant Bot</h1>
           <ChatBot />
         </m.div>
@@ -623,7 +626,7 @@ function Attendance() {
              duration: 0.8,
              
              ease: [0, 0.71, 0.2, 1.01],}}
-        className="bg-[#d7d7e3] min-h-3 rounded-2xl m-3 row-span-4 p-3 ">
+        className="bg-[#d7d7e3] min-h-3  shadow-gray-600 shadow-md rounded-2xl m-3 row-span-4 p-3 ">
           <AttendanceCalculator />
         </m.div>
         <m.div
@@ -633,7 +636,7 @@ function Attendance() {
              duration: 0.8,
              
              ease: [0, 0.71, 0.2, 1.01],}}
-        className="bg-[#d7d7e3] min-h-3 rounded-2xl m-3 row-span-4 p-3">
+        className="bg-[#d7d7e3]  shadow-gray-600 shadow-md min-h-3 rounded-2xl m-3 row-span-4 p-3">
           <div className=" w-full max-w-4xl">
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="flex justify-between items-center mb-4">

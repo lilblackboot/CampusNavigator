@@ -90,6 +90,25 @@ function Makers() {
             }
           />
           <TiltedCard
+            imageSrc="./isha.jpg"
+            altText="Isha Rathode"
+            captionText="Developer"
+            containerHeight="250px"
+            containerWidth="250px"
+            imageHeight="250px"
+            imageWidth="250px"
+            rotateAmplitude={12}
+            scaleOnHover={1.2}
+            showMobileWarning={false}
+            showTooltip={true}
+            displayOverlayContent={true}
+            overlayContent={
+              <p className="tilted-card-demo-text text-white bg-[#0707076e] rounded-2xl px-2 m-3">
+                Isha Rathode
+              </p>
+            }
+          />
+          <TiltedCard
             imageSrc="./shweta.jpg"
             altText="Swepnendu"
             captionText="Mentor"

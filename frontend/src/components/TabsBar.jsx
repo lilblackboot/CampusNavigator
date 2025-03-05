@@ -1,10 +1,8 @@
 import React from "react";
 import Events from "./Events";
 import Attendance from "./Attendance";
-import FindMyTeacher from "./FindMyTeacher";
 import FindMyFood from "./FindMyFood";
 import StarTeachers from "./StarTeachers";
-import GeneralNavigator from "./GeneralNavigator";
 import {motion} from "framer-motion";
 import RotatingText from "./ui/RotatingText";
 import GradientText from "./ui/GradientText";
@@ -24,27 +22,23 @@ function TabsBar() {
 
   const tabs = [
     { id: "tab1", label: "Assistant" },
-    { id: "tab3", label: "Find My Food" },
-    { id: "tab4", label: "Star Teachers" },
-    { id: "tab6", label: "Events" },
+    { id: "tab2", label: "Find My Food" },
+    { id: "tab3", label: "Star Teachers" },
+    { id: "tab4", label: "Events" },
   ];
 
   const tabIcons = {
-    tab1: <BookOpenText />,
-    tab2: <UserRoundSearch />,
-    tab3: <Soup />,
-    tab4: <Star />,
-    tab5: <SearchCheck />,
-    tab6: <Ticket />
+    tab1: <UserRoundSearch />,
+    tab2: <Soup />,
+    tab3: <Star />,
+    tab4: <Ticket />
   };
 
   const tabContent = {
     tab1: <Attendance />,
-    tab2: <FindMyTeacher />,
-    tab3: <FindMyFood />,
-    tab4: <StarTeachers />,
-    tab5: <GeneralNavigator />,
-    tab6: <Events/>
+    tab2: <FindMyFood />,
+    tab3: <StarTeachers />,
+    tab4: <Events/>
   };
 
   return (

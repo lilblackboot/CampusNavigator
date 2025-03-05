@@ -16,19 +16,19 @@ export const HoverImageLinks = ({setActiveTab}) => {
           heading="Food"
           subheading="Eliminate your cravings"
           imgSrc="https://plus.unsplash.com/premium_photo-1664702602703-b42d50b90af3?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          onClick={()=>setActiveTab('tab1')}
+          onClick={()=>setActiveTab('tab2')}
         />
         <Link
           heading="Events"
           subheading="never miss a experience"
           imgSrc="https://images.unsplash.com/photo-1501527459-2d5409f8cf9f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          onClick={()=>setActiveTab('tab1')}
+          onClick={()=>setActiveTab('tab3')}
         />
         <Link
           heading="Teachers"
           subheading="Find the best teachers"
           imgSrc="https://plus.unsplash.com/premium_photo-1663045484188-2a532ce07b41?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          onClick={()=>setActiveTab('tab1')}
+          onClick={()=>setActiveTab('tab4')}
         />
       </div>
     </section>

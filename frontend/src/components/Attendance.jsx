@@ -4,6 +4,7 @@ import { useUser } from "../context/UserContext";
 import ChatBot from "./ChatBot";
 import * as m from 'motion/react-client'
 import CountUp from "./ui/CountUp";
+import PulsatingDots from "./ui/PulsatingDots";
 
 function Attendance() {
   const { user } = useUser();
@@ -547,8 +548,8 @@ function Attendance() {
   if (loading) {
     return (
       <div className="min-h-screen p-8 bg-gray-100 flex flex-col items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-        <p className="mt-4 text-xl">Loading your attendance data...</p>
+        {/* <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div> */}
+        <PulsatingDots />
       </div>
     );
   }

@@ -13,7 +13,7 @@ Because let’s be honest—college is hard enough without having to wander arou
 ---
 ## 🛠️ Tech Stack
 - **Frontend:** React, Axios ⚛️
-- **Backend:** Node.js, Express.js 🛠️
+- **Backend:** Node.js, Express.js, Multer 🛠️
 - **Database:** MongoDB Atlas 🗄️
 - **Authentication & Security:** Bcrypt.js, Dotenv, Nodemailer 🔒
 
@@ -23,24 +23,28 @@ Because let’s be honest—college is hard enough without having to wander arou
 ### Prerequisites
 Make sure you have **Node.js** and **npm** installed (because magic needs a foundation 🏗️).
 
-### Backend Setup
-1. Clone the repository:
+### Clone the repository
    ```sh
    git clone https://github.com/your-repo/campus-navigator.git
    cd campus-navigator
    ```
-2. Install dependencies:
+### Install dependencies:
    ```sh
-   npm install express mongoose cors bcryptjs nodemailer dotenv axios
+   npm install
    ```
-3. Create a `.env` file and add the required secrets (shhh 🤫):
+### Backend Setup
+1. Navigate to the Backend directory:
    ```sh
-   MONGO_URI=your_mongodb_uri
-   JWT_SECRET=your_secret_key
+   cd Backend
+   ```
+2. Create a `.env` file and add the required secrets (shhh 🤫):
+   ```sh
+   MONGODB_URI=your_mongodb_uri
    EMAIL_USER=your_email
    EMAIL_PASS=your_email_password
+   PORT=your_port
    ```
-4. Start the backend server:
+3. Start the backend server:
    ```sh
    node server.js
    ```
@@ -50,11 +54,7 @@ Make sure you have **Node.js** and **npm** installed (because magic needs a foun
    ```sh
    cd frontend
    ```
-2. Install frontend dependencies:
-   ```sh
-   npm install react react-dom axios
-   ```
-3. Start the React development server:
+2. Start the React development server:
    ```sh
    npm run dev
    ```
@@ -62,13 +62,13 @@ Make sure you have **Node.js** and **npm** installed (because magic needs a foun
 ---
 ## 📝 TODO (a.k.a. Stuff We Still Need to Do) 
 - [x] 🔐 Improve authentication & authorization (no hackers allowed!)
-- [ ] 🧹 Need to clean up directory structure
+- [x] 🧹 Need to clean up directory structure
+- [x] ⚡ Optimize database queries for faster performance (no more lag!)
+- [x] 🔐 Add admin page
 - [ ] 🤖 Implement chatbot using Gemini API for better navigation
 - [ ] 🎨 Develop a sleek UI for attendance tracking
-- [ ] ⚡ Optimize database queries for faster performance (no more lag!)
-- [ ] 🔔 Add push notifications for important campus updates
 - [ ] 🍽️ Expand food recommendations with user reviews (because food is life!)
-- [ ] 🧹 **Cleanup:** Merge frontend and backend `node_modules` into a single root `node_modules` directory. (Assigned to [@lilblackboot](https://github.com/lilblackboot) 🛠️)
+- [x] 🧹 **Cleanup:** Merge frontend and backend `node_modules` into a single root `node_modules` directory. (Assigned to [@lilblackboot](https://github.com/lilblackboot) 🛠️)
 
 ---
 ## 🙌 Contributing

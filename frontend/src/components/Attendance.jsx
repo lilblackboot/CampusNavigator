@@ -645,7 +645,7 @@ function Attendance() {
                 </h3>
                {editMode?'': <button
                   onClick={() => setEditMode(true)}
-                  className="px-4 py-2 bg-white text-gray-800 border-black border-1 rounded hover:bg-gray-300"
+                  className="px-4 py-2 bg-white text-gray-800 hover:bg-black border-black border-1 rounded hover:text-white"
                 >
                   Edit Schedule
                 </button>}

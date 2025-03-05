@@ -1,35 +1,47 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import EventCard from "./EventCard";
 
-const posts = [
-  { id: 1, imageUrl: './jinesh.jpg', caption: 'Jignesh Kaviraj at parul University for Projection 2025' },
-  { id: 2, imageUrl:  './badsha.jpg', caption: 'Badshah at Parul University for Projection 2025' },
-  { id: 3, imageUrl: './sunidhi.jpg', caption: 'Sunidhi at Parul University for Projection 2025' },
-  { id: 4, imageUrl: './mostlysane.jpg', caption: 'Mostlysane in Parul univrsity' },
-  { id: 5, imageUrl: './zakir.jpg', caption: 'Zakir khan in Parul unversity' },
-  { id: 6, imageUrl: './arjun.jpg', caption: 'Arjun kapoor at Parul University' },
-];
+const Events = () => {
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
+  const [pastEvents, setPastEvents] = useState([]);
 
-
-function Events() {
-  return (
-    <div className="min-h-screen bg-gray-100 p-4">
-
-
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/events")
+      .then((response) => {
+        const today = new Date();
+        const upcoming = response.data.filter(event => new Date(event.date) >= today);
+        const past = response.data.filter(event => new Date(event.date) < today);
         
-      <h1 className="text-3xl font-bold text-center mb-8">Events</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {posts.map(post => (
-          <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-            <img src={post.imageUrl} alt={post.caption} className="w-full h-48 object-cover" />
-            <div className="p-4">
-              <p className="text-gray-700">{post.caption}</p>
-            </div>
-          </div>
-        ))}
+        setUpcomingEvents(upcoming);
+        setPastEvents(past);
+      })
+      .catch((error) => console.error("Error fetching events:", error));
+  }, []);
+
+  return (
+    <div className="p-8 bg-gray-100 min-h-screen">
+      {/* Upcoming Events */}
+      <h2 className="text-2xl font-bold mb-4">Upcoming Events</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {upcomingEvents.length > 0 ? (
+          upcomingEvents.map((event) => <EventCard key={event._id} event={event} />)
+        ) : (
+          <p>No upcoming events.</p>
+        )}
+      </div>
+
+      {/* Past Events */}
+      <h2 className="text-2xl font-bold mt-8 mb-4">Past Events</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {pastEvents.length > 0 ? (
+          pastEvents.map((event) => <EventCard key={event._id} event={event} />)
+        ) : (
+          <p>No past events.</p>
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default Events;

@@ -13,36 +13,28 @@ const Login = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const validateEmail = (email) => {
-    const emailRegex = /^\d+@paruluniversity\.ac\.in$/;
-    return emailRegex.test(email);
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
 
- // In Login.jsx
-// In Login.jsx, update the handleSubmit function
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError('');
-  setIsLoading(true);
-
-  try {
-    // Using the proxy - no need for full URL
-    const response = await axios.post('/api/login', formData);
-    
-    if (response.data.user && response.data.user.id) {
-      login(response.data.user);
-    } else {
-      setError('Invalid response from server');
+    try {
+      const response = await axios.post('/api/login', formData);
+      
+      if (response.data.user && response.data.user.id) {
+        login(response.data.user);
+      } else {
+        setError('Invalid response from server');
+      }
+      
+      navigate('/home');
+    } catch (err) {
+      console.error('Login error:', err);
+      setError(err.response?.data?.message || 'Login failed');
+    } finally {
+      setIsLoading(false);
     }
-    
-    navigate('/home');
-  } catch (err) {
-    console.error('Login error:', err);
-    setError(err.response?.data?.message || 'Login failed');
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -88,7 +80,7 @@ const handleSubmit = async (e) => {
             <div className="text-red-500 text-sm text-center">{error}</div>
           )}
 
-          <div>
+          <div className="space-y-4">
             <button
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400"
@@ -96,6 +88,15 @@ const handleSubmit = async (e) => {
             >
               {isLoading ? 'Logging in...' : 'Login'}
             </button>
+
+            <div className="flex justify-center">
+              <Link 
+                to="/admin" 
+                className="text-sm text-gray-600 hover:text-gray-800 underline"
+              >
+                Admin Login
+              </Link>
+            </div>
           </div>
         </form>
         

@@ -4,7 +4,9 @@ import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
-import '@fontsource/montserrat'
+import Admin from './pages/Admin';
+import EventDetails from './pages/EventDetails';
+import ChangeCredentials from './pages/ChangeCredentials';
 
 function App() {
   return (
@@ -15,6 +17,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/change-credentials" element={<ChangeCredentials />} />
+          <Route path="/event/:id" element={<EventDetails />} />
           {/* <Route path="/profile" element={<Profile />} /> */}
           {/* <Route path="/settings" element={<Settings />} /> */}
         </Routes>

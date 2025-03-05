@@ -23,11 +23,9 @@ function TabsBar() {
   const [activeTab, setActiveTab] = useState('');
 
   const tabs = [
-    { id: "tab1", label: "Attendence" },
-    { id: "tab2", label: "Find My Teacher" },
+    { id: "tab1", label: "Assistant" },
     { id: "tab3", label: "Find My Food" },
     { id: "tab4", label: "Star Teachers" },
-    { id: "tab5", label: "Navigator" },
     { id: "tab6", label: "Events" },
   ];
 
@@ -59,6 +57,8 @@ function TabsBar() {
         
        
         :
+        
+
         
         tabs.map((tab) => (
           <button

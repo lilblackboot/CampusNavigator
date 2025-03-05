@@ -8,6 +8,7 @@ const dotenv = require('dotenv');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const { type } = require('os');
 
 dotenv.config();
 const app = express();
@@ -109,13 +110,9 @@ const foodPostSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  latitude: {
-    type: Number,
-    required: false
-  },
-  longitude: {
-    type: Number,
-    required: false
+  location: {
+    lat: Number,
+    lng: Number
   },
   createdAt: {
     type: Date,
@@ -443,7 +440,7 @@ app.get('/api/food-posts', async (req, res) => {
 // Create a new food post with image upload
 app.post('/api/food-posts', upload.single('image'), async (req, res) => {
   try {
-    const { userId, region, shop, food, description, latitude, longitude} = req.body;
+    const { userId, region, shop, food, description, lat, lng } = req.body;
     
     if (!userId) {
       return res.status(400).json({ message: 'User ID is required' });
@@ -471,8 +468,10 @@ app.post('/api/food-posts', upload.single('image'), async (req, res) => {
       food,
       description,
       imageUrl,
-      latitude: latitude || null,
-      longitude: longitude || null
+      location: {
+        lat: lat || null,
+        lng: lng || null
+      }
     });
     
     const savedPost = await newFoodPost.save();
@@ -527,6 +526,461 @@ app.delete('/api/food-posts/:id', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+// Set up Multer for file uploads
+const storage_events = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadPath = 'uploads/uni-events/';
+
+    // Ensure the folder exists
+    fs.mkdirSync(uploadPath, { recursive: true });
+
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
+
+const upload_events = multer({ 
+  storage: storage_events,
+  limits: { fileSize: 24 * 1024 * 1024 }, // 5MB limit
+  fileFilter: (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    
+    if (mimetype && extname) {
+      return cb(null, true);
+    }
+    cb(new Error('Only image files are allowed!'));
+  }
+});
+
+// Define Event Schema
+const eventSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  date: {
+    type: Date,
+    required: true
+  },
+  time: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  location: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  description: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  imageUrl: {
+    type: String,
+    default: null
+  }
+}, {
+  timestamps: true
+});
+
+// Create Event Model
+const Event = mongoose.model('Event', eventSchema);
+
+// Define Admin Schema
+const adminSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true
+  },
+  password: {
+    type: String,
+    required: true
+  }
+});
+
+// Create Admin Model
+const Admin = mongoose.model('Admin', adminSchema);
+
+// Initialize default admin if not exists
+const initializeAdmin = async () => {
+  try {
+    const adminExists = await Admin.findOne({ username: 'admin' });
+    if (!adminExists) {
+      // Using bcrypt for password hashing
+      const hashedPassword = await bcrypt.hash('admin123', 10);
+      await Admin.create({
+        username: 'admin',
+        password: hashedPassword
+      });
+      console.log('Default admin created');
+    }
+  } catch (error) {
+    console.error('Error initializing admin:', error);
+  }
+};
+
+initializeAdmin();
+
+// API Routes
+
+// Get all events
+app.get('/api/events', async (req, res) => {
+  try {
+    const events = await Event.find().sort({ date: 1 });
+    res.json(events);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching events', error: error.message });
+  }
+});
+
+// Get single event
+app.get('/api/events/:id', async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+    res.json(event);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching event', error: error.message });
+  }
+});
+
+// Create new event
+app.post('/api/events', upload_events.single('image'), async (req, res) => {
+  try {
+    const eventData = {
+      title: req.body.title,
+      date: req.body.date,
+      time: req.body.time,
+      location: req.body.location,
+      description: req.body.description
+    };
+
+    if (req.file) {
+      eventData.imageUrl = `/uploads/uni-events/${req.file.filename}`;
+    }
+
+    const newEvent = new Event(eventData);
+    await newEvent.save();
+    
+    res.status(201).json(newEvent);
+  } catch (error) {
+    res.status(400).json({ message: 'Error creating event', error: error.message });
+  }
+});
+
+// Update event
+app.put('/api/events/:id', upload_events.single('image'), async (req, res) => {
+  try {
+    const eventData = {
+      title: req.body.title,
+      date: req.body.date,
+      time: req.body.time,
+      location: req.body.location,
+      description: req.body.description
+    };
+
+    if (req.file) {
+      eventData.imageUrl = `/uploads/uni-events/${req.file.filename}`;
+    }
+
+    const updatedEvent = await Event.findByIdAndUpdate(
+      req.params.id,
+      eventData,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedEvent) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    res.json(updatedEvent);
+  } catch (error) {
+    res.status(400).json({ message: 'Error updating event', error: error.message });
+  }
+});
+
+// Delete event
+app.delete('/api/events/:id', async (req, res) => {
+  try {
+    const deletedEvent = await Event.findByIdAndDelete(req.params.id);
+    
+    if (!deletedEvent) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    res.json({ message: 'Event deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting event', error: error.message });
+  }
+});
+
+// Admin routes
+app.post('/api/admin/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    
+    const admin = await Admin.findOne({ username });
+    
+    if (!admin) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+    
+    // Compare password with hashed password
+    const isPasswordValid = await bcrypt.compare(password, admin.password);
+    
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+    
+    res.json({ message: 'Login successful' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error during login', error: error.message });
+  }
+});
+
+app.post('/api/admin/change-credentials', async (req, res) => {
+  try {
+    const { currentUsername, currentPassword, newUsername, newPassword } = req.body;
+
+    console.log('Received request to change credentials:', { currentUsername, newUsername });
+
+    const admin = await Admin.findOne({ username: currentUsername });
+
+    if (!admin) {
+      console.log('Admin not found');
+      return res.status(401).json({ message: 'Current credentials are invalid' });
+    }
+
+    // Verify current password
+    const isPasswordValid = await bcrypt.compare(currentPassword, admin.password);
+
+    if (!isPasswordValid) {
+      console.log('Invalid password');
+      return res.status(401).json({ message: 'Current credentials are invalid' });
+    }
+
+    // Check if new username is already taken
+    const existingAdmin = await Admin.findOne({ username: newUsername });
+    if (existingAdmin) {
+      console.log('New username already exists');
+      return res.status(400).json({ message: 'Username already taken' });
+    }
+
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await Admin.create({ username: newUsername, password: hashedPassword });
+    
+    console.log('New admin created:', newUsername);
+
+    // Delete previous admin entry
+    await Admin.deleteOne({ username: currentUsername });
+
+    console.log('Old admin deleted:', currentUsername);
+
+    res.json({ message: 'Credentials updated successfully' });
+  } catch (error) {
+    console.error('Error updating credentials:', error.message);
+    res.status(500).json({ message: 'Error updating credentials', error: error.message });
+  }
+});
+
+
+// Public endpoint to get published events
+app.get('/api/public/events', async (req, res) => {
+  try {
+    const events = await Event.find().sort({ date: 1 });
+    res.json(events);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching events', error: error.message });
+  }
+});
+
+// Define Teacher Schema
+const teacherSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  subject: {
+    type: String,
+    required: true
+  },
+  remark: {
+    type: String,
+    required: true
+  },
+  imageUrl: {
+    type: String,
+    required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const Teacher = mongoose.model('Teacher', teacherSchema);
+
+// Set up Multer for file uploads
+const storage_teachers = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadPath = 'uploads/teachers/';
+
+    // Ensure the folder exists
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true });
+    }
+
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
+
+const upload_teachers = multer({ 
+  storage: storage_teachers,
+  limits: { fileSize: 24 * 1024 * 1024 }, // 5MB limit
+  fileFilter: (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    
+    if (mimetype && extname) {
+      return cb(null, true);
+    }
+    cb(new Error('Only image files are allowed!'));
+  }
+});
+
+// API Routes
+
+// Get all teachers
+app.get('/api/teachers', async (req, res) => {
+  try {
+    const teachers = await Teacher.find().sort({ createdAt: -1 });
+    res.status(200).json(teachers);
+  } catch (error) {
+    console.error('Error fetching teachers:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Get a single teacher
+app.get('/api/teachers/:id', async (req, res) => {
+  try {
+    const teacher = await Teacher.findById(req.params.id);
+    if (!teacher) {
+      return res.status(404).json({ message: 'Teacher not found' });
+    }
+    res.status(200).json(teacher);
+  } catch (error) {
+    console.error('Error fetching teacher:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Add a new teacher
+app.post('/api/teachers', upload_teachers.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'Image is required' });
+    }
+    
+    const imageUrl = `/uploads/teachers/${req.file.filename}`;
+    
+    const newTeacher = new Teacher({
+      name: req.body.name,
+      subject: req.body.subject,
+      remark: req.body.remark,
+      imageUrl: imageUrl
+    });
+    
+    const savedTeacher = await newTeacher.save();
+    res.status(201).json(savedTeacher);
+  } catch (error) {
+    console.error('Error adding teacher:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Update a teacher
+app.put('/api/teachers/:id', upload_teachers.single('image'), async (req, res) => {
+  try {
+    const teacher = await Teacher.findById(req.params.id);
+    if (!teacher) {
+      return res.status(404).json({ message: 'Teacher not found' });
+    }
+    
+    // Update teacher fields
+    teacher.name = req.body.name;
+    teacher.subject = req.body.subject;
+    teacher.remark = req.body.remark;
+    
+    // Update image if a new one is uploaded
+    if (req.file) {
+      teacher.imageUrl = `/uploads/teachers/${req.file.filename}`;
+    }
+    
+    const updatedTeacher = await teacher.save();
+    res.status(200).json(updatedTeacher);
+  } catch (error) {
+    console.error('Error updating teacher:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Delete a teacher
+app.delete('/api/teachers/:id', async (req, res) => {
+  try {
+    const teacher = await Teacher.findById(req.params.id);
+    if (!teacher) {
+      return res.status(404).json({ message: 'Teacher not found' });
+    }
+    
+    await Teacher.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Teacher deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting teacher:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Search teachers
+app.get('/api/teachers/search', async (req, res) => {
+  try {
+    const { query } = req.query;
+    
+    if (!query) {
+      return res.status(400).json({ message: 'Search query is required' });
+    }
+    
+    const teachers = await Teacher.find({
+      $or: [
+        { name: { $regex: query, $options: 'i' } },
+        { subject: { $regex: query, $options: 'i' } }
+      ]
+    });
+    
+    res.status(200).json(teachers);
+  } catch (error) {
+    console.error('Error searching teachers:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

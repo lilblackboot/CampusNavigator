@@ -3,6 +3,7 @@ import axios from "axios";
 import { useUser } from "../context/UserContext";
 import ChatBot from "./ChatBot";
 import * as m from 'motion/react-client'
+import CountUp from "./ui/CountUp";
 
 function Attendance() {
   const { user } = useUser();
@@ -563,7 +564,14 @@ function Attendance() {
                 duration: 0.4,
                 scale: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
             }} 
-            className="bg-[#48c886] text-white font-semibold py-20 rounded-3xl text-center">Current Attendance</m.div>
+            className="bg-[#48c886] text-white font-semibold py-20 rounded-3xl text-center"> <div className="font-semibold text-5xl"><CountUp
+            from={0}
+            to={currentAttendance}
+            separator=","
+            direction="up"
+            duration={1}
+            className="count-up-text font-semibold text-5xl"
+          />%</div>Current Attendance</m.div>
           <m.div 
            initial={{ opacity: 0, scale: 0 }}
            animate={{ opacity: 1, scale: 1 }}
@@ -572,7 +580,14 @@ function Attendance() {
                duration: 0.4,
                scale: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
            }} 
-          className="bg-[#7034ff] text-white font-semibold py-20 rounded-3xl text-center">total slots</m.div>
+          className="bg-[#7034ff] text-white font-semibold py-20 rounded-3xl text-center"> <div><CountUp
+          from={0}
+          to={totalClasses}
+          separator=","
+          direction="up"
+          duration={1}
+          className="count-up-text font-semibold text-5xl"
+        /></div> total slots</m.div>
           <m.div 
            initial={{ opacity: 0, scale: 0 }}
            animate={{ opacity: 1, scale: 1 }}
@@ -581,7 +596,14 @@ function Attendance() {
                duration: 0.4,
                scale: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
            }} 
-          className="bg-[#ff822c] text-white font-semibold py-20 rounded-3xl text-center">attended</m.div>
+          className="bg-[#ff822c] text-white font-semibold py-20 rounded-3xl text-center"> <div><CountUp
+          from={0}
+          to={attendedSlots}
+          separator=","
+          direction="up"
+          duration={1}
+          className="count-up-text font-semibold text-5xl"
+        /></div>attended</m.div>
         </div>
         <m.div
           initial={{ opacity: 0, scale: 0.5 }}

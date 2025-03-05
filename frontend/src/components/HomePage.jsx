@@ -1,15 +1,79 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import GradientText from "./ui/GradientText";
 import RotatingText from "./ui/RotatingText";
 import { HoverImageLinks } from "./ui/HoverImageLinks";
 
+// Star Component for creating random, animated stars
+const Star = ({ size, x, y, delay, duration }) => {
+  return (
+    <motion.div
+      className="absolute bg-white rounded-full opacity-70"
+      style={{
+        width: `${size}px`,
+        height: `${size}px`,
+        left: `${x}%`,
+        top: `${y}%`,
+      }}
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ 
+        scale: [0, 1.5, 1], 
+        opacity: [0, 0.7, 0.3],
+      }}
+      transition={{
+        duration: duration,
+        delay: delay,
+        repeat: Infinity,
+        repeatType: "reverse",
+      }}
+    />
+  );
+};
+
+// Background with Animated Stars
+const StarryBackground = () => {
+  // Generate a fixed number of stars with random properties
+  const stars = useMemo(() => {
+    return Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      size: Math.random() * 3 + 1, // Random size between 1-4 pixels
+      x: Math.random() * 100, // Random horizontal position
+      y: Math.random() * 100, // Random vertical position
+      delay: Math.random() * 2, // Random delay for staggered animation
+      duration: Math.random() * 3 + 2, // Random duration between 2-5 seconds
+    }));
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-gradient-to-br from-[#0a0a2a] via-[#1a1a3a] to-[#2a2a4a]">
+      {stars.map((star) => (
+        <Star 
+          key={star.id}
+          size={star.size}
+          x={star.x}
+          y={star.y}
+          delay={star.delay}
+          duration={star.duration}
+        />
+      ))}
+    </div>
+  );
+};
+
 function HomePage({ setActiveTab }) {
   return (
-    <div className="flex  justify-center bg-[#0000009c] w-full sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row">
-      <div className="px-7 min-w-[900px]">
-        <header className=" flex   pl-6 flex-col  h-screen  justify-center items-start  w-[100%] text-white ">
-          <motion.h1 className="font-bold flex m-0  text-7xl">
+    <div className="relative flex justify-center w-full h-screen overflow-hidden sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row">
+      {/* Starry Background */}
+      <StarryBackground />
+      
+      <div className="px-7 min-w-[900px] z-10 relative">
+        <header className="flex pl-6 flex-col h-screen justify-center items-start w-[100%] text-white">
+          <motion.h1 
+            className="font-bold flex m-0 text-7xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             Welcome back,
             <GradientText
               colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
@@ -36,15 +100,9 @@ function HomePage({ setActiveTab }) {
             />{" "}
           </div>
         </header>
-        {/* <main>
-      <button className="rounded-2xl bg-amber-400 scale-z-100 p-6 text-black" onClick={()=>setActiveTab('tab1')}>Teacher</button>
-      <button className="rounded-2xl bg-amber-400 scale-z-100 p-6 text-black" onClick={()=>setActiveTab('tab2')}>Navigator</button>
-      <button className="rounded-2xl bg-amber-400 scale-z-100 p-6 text-black" onClick={()=>setActiveTab('tab6')}>Events</button>
-      <button className="rounded-2xl bg-amber-400 scale-z-100 p-6 text-black" onClick={()=>setActiveTab('tab3')}>food</button>
-      </main> */}
       </div>
 
-      <div id="links" className="h-screen m-0 pt-10 lg:w-1/2 ">
+      <div id="links" className="h-screen m-0 pt-10 lg:w-1/2 z-10 relative">
         <HoverImageLinks setActiveTab={setActiveTab} />
       </div>
     </div>

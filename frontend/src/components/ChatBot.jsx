@@ -23,9 +23,9 @@ const ChatBot = () => {
 
   const timetableData = Array.isArray(rawTimetableData) ? rawTimetableData : [];
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  // useEffect(() => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  // }, [messages]);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -82,8 +82,8 @@ const ChatBot = () => {
   };
 
   return (
-    <Card className="w-full overflow-y-scroll  mx-auto h-full pt-3 flex flex-col bg-gradient-to-b from-white to-gray-50">
-      <CardContent className="flex-1 flex flex-col p-4">
+    <Card className="w-full mx-auto overflow-y-scroll  pt-3 flex flex-col h-[650px] bg-gradient-to-b from-white to-gray-50">
+      <CardContent className="flex-1  flex flex-col p-4">
         <div 
           ref={messageContainerRef}
           className="flex-1 overflow-y-auto mb-4 space-y-4 scroll-smooth"

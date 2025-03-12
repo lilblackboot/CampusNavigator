@@ -45,7 +45,7 @@ const StarryBackground = () => {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-gradient-to-br from-[#0a0a2a] via-[#1a1a3a] to-[#2a2a4a]">
+    <div className="absolute inset-0 overflow-hidden ">
       {stars.map((star) => (
         <Star 
           key={star.id}

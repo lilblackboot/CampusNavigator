@@ -23,7 +23,7 @@ const CardContent = React.forwardRef(({ className, ...props }, ref) => (
     className={`
       p-6 pt-0
       transition-all duration-300
-      animate-slideUp
+      // animate-slideUp
       ${className}`} 
     {...props} 
   />

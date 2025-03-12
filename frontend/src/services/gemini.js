@@ -333,7 +333,7 @@ export const generateResponse = async (question, timetableData, image = null) =>
     } else {
       console.log("Processing standard timetable query");
       // Use gemini-pro for text-based queries using JSON data
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
       
       const context = `You are a helpful timetable assistant. Here is the timetable data:
       ${JSON.stringify(timetableData, null, 2)}
@@ -358,11 +358,27 @@ export const generateResponse = async (question, timetableData, image = null) =>
   }
 };
 
+// In gemini.js, add this function at the bottom and export it
+export const checkApiKey = () => {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!apiKey) {
+    console.error("❌ Missing Gemini API key. Please add VITE_GEMINI_API_KEY to your .env file");
+    return { valid: false, message: "Missing API key" };
+  }
+  
+  if (apiKey === "YOUR_API_KEY" || apiKey.includes("PLACEHOLDER")) {
+    console.error("❌ Invalid Gemini API key. Please replace the placeholder with your actual API key");
+    return { valid: false, message: "Using placeholder API key" };
+  }
+  
+  return { valid: true };
+};
+
 // Model testing function
 export const testModelAccess = async () => {
   try {
     const flashModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    const proModel = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const proModel = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
     
     // Test both models
     const results = await Promise.all([

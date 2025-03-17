@@ -20,7 +20,7 @@ const Events = () => {
   }, []);
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
+    <div className="p-8  min-h-screen">
       {/* Upcoming Events */}
       <h2 className="text-2xl font-bold mb-4">Upcoming Events</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

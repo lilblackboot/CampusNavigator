@@ -17,8 +17,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-function TabsBar() {
-  const [activeTab, setActiveTab] = useState('');
+function TabsBar({ activeTab, setActiveTab }) {
+  
 
   const tabs = [
     { id: "tab1", label: "Assistant" },

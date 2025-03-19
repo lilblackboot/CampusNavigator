@@ -1,21 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-scroll";
-import GradientText from "../components/ui/GradientText";
 import ScrollVelocity from "../components/ui/ScrollVelocity";
 import { Binoculars } from "lucide-react";
-// import Squares from "../components/ui/Squares";
 import Ballpit from "../components/ui/Ballpit";
-// import Aurora from "../components/ui/Aurora";
-import Particles from "../components/ui/Particles";
 import FadeContent from "../components/ui/FadeContent";
-import { useInView, motion } from "framer-motion";
-import GridMotion from "../components/ui/GridMotion";
 import Features from "../components/Features";
-import GetStarted from "../components/GetStarted";
+
 import Intro from "../components/Intro";
 import Makers from "../components/Makers";
-import AboutUs from "../components/AboutUs.jsx";
 import * as m from "motion/react-client";
 
 function Landing() {
@@ -64,14 +57,6 @@ function Landing() {
               Features
             </Link>
             <Link
-              to="about-us"
-              smooth={true}
-              duration={500}
-              className="cursor-pointer hover:text-gray-400"
-            >
-              About
-            </Link>
-            <Link
               to="makers"
               smooth={true}
               duration={500}
@@ -113,13 +98,7 @@ function Landing() {
           className=" bg-transparent overflow-x-hidden  bg-opacity-50 min-h-screen flex flex-col justify-center items-center text-center text-white p-4"
         >
           <div className="absolute bg-black w-full z-[-1]  h-screen">
-            {/* <Squares
-              speed={0.5}
-              squareSize={20}
-              direction="up" // up, down, left, right, diagonal
-              borderColor="#fff"
-              hoverFillColor="#222"
-            /> */}
+        
             <Ballpit
               count={200}
               gravity={0.5}

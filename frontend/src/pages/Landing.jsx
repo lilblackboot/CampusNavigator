@@ -16,37 +16,11 @@ import GetStarted from "../components/GetStarted";
 import Intro from "../components/Intro";
 import Makers from "../components/Makers";
 import AboutUs from "../components/AboutUs.jsx";
-import * as m from "motion/react-client"
+import * as m from "motion/react-client";
+
 function Landing() {
   const navigate = useNavigate();
   const [showButtons, setShowButtons] = useState(false);
-  const items = [
-    "Item 1",
-    <div key="jsx-item-1">Custom JSX Content</div>,
-    "https://images.collegedunia.com/public/college_data/images/appImage/1599193361PuCampus.jpg?mode=stretch",
-    "Item 2",
-    <div key="jsx-item-2">Custom JSX Content</div>,
-    "Item 4",
-    <div key="jsx-item-2">Custom JSX Content</div>,
-    "https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Item 5",
-    <div key="jsx-item-2">Custom JSX Content</div>,
-    "Item 7",
-    <div key="jsx-item-2">Custom JSX Content</div>,
-    "https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Item 8",
-    <div key="jsx-item-2">Custom JSX Content</div>,
-    "Item 10",
-    <div key="jsx-item-3">Custom JSX Content</div>,
-    "https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Item 11",
-    <div key="jsx-item-2">Custom JSX Content</div>,
-    "Item 13",
-    <div key="jsx-item-4">Custom JSX Content</div>,
-    "https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "Item 14",
-    // Add more items as needed
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -194,16 +168,16 @@ function Landing() {
 
               <div className="flex space-x-4">
                 <m.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                   className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full transition duration-300"
                   onClick={() => navigate("/login")}
                 >
                   Login
                 </m.button>
                 <m.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                   className="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full transition duration-300"
                   onClick={() => navigate("/signup")}
                 >
@@ -226,9 +200,9 @@ function Landing() {
       <Intro />
 
       <Features />
-      <GetStarted />
+      {/* <GetStarted />
 
-      <AboutUs />
+      <AboutUs /> */}
 
       <Makers />
 
@@ -236,51 +210,73 @@ function Landing() {
         id="contact-us"
         className="min-h-screen p-8 bg-gray-100 text-black flex flex-col justify-center"
       >
-        <h2 className="text-4xl font-bold mb-4">Contact Us</h2>
-        <form className="max-w-lg mx-auto">
-          <div className="mb-4">
-            <label className="block text-lg font-medium mb-2" htmlFor="name">
-              Name
-            </label>
-            <input
-              className="w-full p-2 border border-gray-300 rounded"
-              type="text"
-              id="name"
-              name="name"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-lg font-medium mb-2" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="w-full p-2 border border-gray-300 rounded"
-              type="email"
-              id="email"
-              name="email"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-lg font-medium mb-2" htmlFor="message">
-              Message
-            </label>
-            <textarea
-              className="w-full p-2 border border-gray-300 rounded"
-              id="message"
-              name="message"
-              rows="4"
-              required
-            ></textarea>
-          </div>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
-            type="submit"
-          >
-            Send Message
-          </button>
-        </form>
+        <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
+          <h2 className="text-4xl font-bold mb-4 text-center text-gray-800">
+            Contact Us
+          </h2>
+          <p className="text-lg text-center text-gray-600 mb-8">
+            We'd love to hear from you! Whether you have a question about
+            features, trials, pricing, need a demo, or anything else, our team
+            is ready to answer all your questions.
+          </p>
+          <form className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label
+                  className="block text-lg font-medium mb-2 text-gray-700"
+                  htmlFor="name"
+                >
+                  Name
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  className="block text-lg font-medium mb-2 text-gray-700"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <input
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                className="block text-lg font-medium mb-2 text-gray-700"
+                htmlFor="message"
+              >
+                Message
+              </label>
+              <textarea
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                id="message"
+                name="message"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            <div className="text-center">
+              <button
+                className="bg-black hover:bg-white hover:text-black border text-white font-bold py-3 px-6 rounded-full transition duration-300"
+                type="submit"
+              >
+                Send Message
+              </button>
+            </div>
+          </form>
+        </div>
       </section>
     </div>
   );

@@ -7,7 +7,7 @@ function Features() {
   return (
     <section
         id="features"
-        className="min-h-screen p-8 bg-black text-white flex flex-col justify-center"
+        className="min-h-screen p-8  bg-white flex flex-col justify-center"
       >
 
       

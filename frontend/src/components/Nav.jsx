@@ -36,12 +36,30 @@ const Nav = () => {
       </div>
 
       <div className="flex items-center gap-3 relative" ref={dropdownRef}>
-        <div className="flex flex-col">
-          <span className="text-sm text-white font-medium">
-            {user?.email?.split('@')[0] || 'Guest'}
-          </span>
-          <span className="text-xs text-gray-500">{user?.email || 'Not logged in'}</span>
+        {/* Profile Picture + Username Container */}
+        <div 
+          onClick={() => navigate('/ProfilePage')} 
+          className="flex items-center gap-3 cursor-pointer"
+        >
+          {user?.profilePicture ? (
+            <img 
+              src={user.profilePicture} 
+              alt="Profile" 
+              className="w-10 h-10 rounded-full object-cover"
+            />
+          ) : (
+            <div className="w-10 h-10 rounded-full bg-gray-500 flex items-center justify-center">
+              <User size={20} className="text-white" />
+            </div>
+          )}
+          <div className="flex flex-col">
+            <span className="text-sm text-white font-medium">
+              {user?.username || user?.email?.split('@')[0] || 'Guest'}
+            </span>
+            <span className="text-xs text-gray-500">{user?.email || 'Not logged in'}</span>
+          </div>
         </div>
+        
         <button 
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           className="text-gray-400 hover:text-white cursor-pointer"
@@ -54,7 +72,7 @@ const Nav = () => {
           <div className="absolute right-0 top-12 w-48 py-2 bg-white rounded-md shadow-xl z-50">
             <button
               onClick={() => {
-                navigate('/profile');
+                navigate('/ProfilePage');
                 setIsDropdownOpen(false);
               }}
               className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

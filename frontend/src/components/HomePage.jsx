@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { motion } from "framer-motion";
+import { useUser } from "../context/UserContext.jsx";
 import GradientText from "./ui/GradientText";
 import RotatingText from "./ui/RotatingText";
 import { HoverImageLinks } from "./ui/HoverImageLinks";
@@ -16,8 +17,8 @@ const Star = ({ size, x, y, delay, duration }) => {
         top: `${y}%`,
       }}
       initial={{ scale: 0, opacity: 0 }}
-      animate={{ 
-        scale: [0, 1.5, 1], 
+      animate={{
+        scale: [0, 1.5, 1],
         opacity: [0, 0.7, 0.3],
       }}
       transition={{
@@ -47,7 +48,7 @@ const StarryBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden ">
       {stars.map((star) => (
-        <Star 
+        <Star
           key={star.id}
           size={star.size}
           x={star.x}
@@ -61,14 +62,18 @@ const StarryBackground = () => {
 };
 
 function HomePage({ setActiveTab }) {
+  const { user } = useUser();
+  
+  // Fallback to 'Guest' if no username is available
+  const displayName = user?.username || user?.email?.split('@')[0] || 'Guest';
+
   return (
     <div className="relative flex justify-center w-full h-screen overflow-hidden sm:flex-col md:flex-col lg:flex-row xl:flex-row 2xl:flex-row">
       {/* Starry Background */}
       <StarryBackground />
-      
       <div className="px-7 min-w-[900px] z-10 relative">
         <header className="flex pl-6 flex-col h-screen justify-center items-start w-[100%] text-white">
-          <motion.h1 
+          <motion.h1
             className="font-bold flex m-0 text-7xl"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -81,7 +86,7 @@ function HomePage({ setActiveTab }) {
               showBorder={false}
               className="custom-class"
             >
-              Suzan
+              {displayName}
             </GradientText>
           </motion.h1>
           <div className="flex gap-2 items-center text-5xl my-8">
@@ -101,7 +106,6 @@ function HomePage({ setActiveTab }) {
           </div>
         </header>
       </div>
-
       <div id="links" className="h-screen m-0 pt-10 lg:w-1/2 z-10 relative">
         <HoverImageLinks setActiveTab={setActiveTab} />
       </div>

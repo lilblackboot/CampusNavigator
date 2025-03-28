@@ -8,44 +8,52 @@ export const UserProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  // In UserContext.jsx, update the login function
-const login = (userData) => {
-  // Log the incoming data for debugging
-  console.log('Login data received:', userData);
+  const login = (userData) => {
+    // Log the incoming data for debugging
+    console.log('Login data received:', userData);
 
-  // Handle both direct user data and nested user object
-  const userInfo = userData.user || userData;
+    // Handle both direct user data and nested user object
+    const userInfo = userData.user || userData;
 
-  // Create a properly formatted user object
-  const formattedUser = {
-    id: userInfo._id || userInfo.id || null,
-    email: userInfo.email
+    // Create a properly formatted user object with additional profile fields
+    const formattedUser = {
+      id: userInfo._id || userInfo.id || null,
+      email: userInfo.email,
+      username: userInfo.username || userInfo.email?.split('@')[0] || 'Guest',
+      profilePicture: userInfo.profilePicture || null
+    };
+
+    // Validate the formatted user
+    if (!formattedUser.email) {
+      console.error('No email provided in user data');
+      return;
+    }
+
+    if (!formattedUser.id) {
+      console.warn('No ID provided in user data - attempting to fetch user details');
+      // You could make an API call here to fetch user details if needed
+    }
+
+    console.log('Storing formatted user:', formattedUser);
+    setUser(formattedUser);
+    localStorage.setItem('user', JSON.stringify(formattedUser));
   };
-
-  // Validate the formatted user
-  if (!formattedUser.email) {
-    console.error('No email provided in user data');
-    return;
-  }
-
-  if (!formattedUser.id) {
-    console.warn('No ID provided in user data - attempting to fetch user details');
-    // You could make an API call here to fetch user details if needed
-    // For now, we'll just store what we have
-  }
-
-  console.log('Storing formatted user:', formattedUser);
-  setUser(formattedUser);
-  localStorage.setItem('user', JSON.stringify(formattedUser));
-};
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
   };
 
+  const updateUser = (updates) => {
+    setUser(prevUser => {
+      const newUser = { ...prevUser, ...updates };
+      localStorage.setItem('user', JSON.stringify(newUser));
+      return newUser;
+    });
+  };
+
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ user, login, logout, updateUser }}>
       {children}
     </UserContext.Provider>
   );

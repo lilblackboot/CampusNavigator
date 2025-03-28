@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import Admin from './pages/Admin';
 import EventDetails from './pages/EventDetails';
 import ChangeCredentials from './pages/ChangeCredentials';
+import ProfilePage from './components/ProfilePage';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/change-credentials" element={<ChangeCredentials />} />
           <Route path="/event/:id" element={<EventDetails />} />
-          {/* <Route path="/profile" element={<Profile />} /> */}
+          <Route path="/ProfilePage" element={<ProfilePage />} />
           {/* <Route path="/settings" element={<Settings />} /> */}
         </Routes>
       </Router>

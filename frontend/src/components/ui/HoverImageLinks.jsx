@@ -21,13 +21,13 @@ export const HoverImageLinks = ({setActiveTab}) => {
         <Link
           heading="Teachers"
           subheading="Find the best teachers"
-          imgSrc="https://images.unsplash.com/photo-1501527459-2d5409f8cf9f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          imgSrc="https://plus.unsplash.com/premium_photo-1663045484188-2a532ce07b41?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           onClick={()=>setActiveTab('tab3')}
         />
         <Link
           heading="Events"
           subheading="Never miss an experiance"
-          imgSrc="https://plus.unsplash.com/premium_photo-1663045484188-2a532ce07b41?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          imgSrc="https://images.unsplash.com/photo-1501527459-2d5409f8cf9f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           onClick={()=>setActiveTab('tab4')}
         />
       </div>
